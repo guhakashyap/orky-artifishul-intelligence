@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORKY TRANSFO'MA' DOCUMENTATION - DA TECHNICAL MANUAL!</title>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Orky Color Palette */
+        :root {
+            --ork-green: #2D5016;
+            --mekboy-blue: #1E3A8A;
+            --red-wunz: #DC2626;
+            --yellow-teef: #EAB308;
+            --rust-orange: #EA580C;
+            --scrap-metal: #6B7280;
+            --warp-purple: #7C3AED;
+            --bone-white: #F3F4F6;
+            --void-black: #0F172A;
+        }
+        
+        body {
+            background: var(--void-black);
+            color: var(--bone-white);
+            font-family: 'Quattrocento Sans', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .ork-title {
+            font-family: 'Oranienbaum', serif;
+            text-shadow: 3px 3px 0px var(--red-wunz), 6px 6px 0px var(--ork-green);
+            letter-spacing: 0.1em;
+        }
+        
+        .mekboy-panel {
+            background: linear-gradient(135deg, var(--mekboy-blue), var(--ork-green));
+            border: 3px solid var(--scrap-metal);
+            position: relative;
+        }
+        
+        .mekboy-panel::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--red-wunz), var(--yellow-teef), var(--mekboy-blue));
+            z-index: -1;
+            border-radius: inherit;
+        }
+        
+        .ork-button {
+            background: linear-gradient(45deg, var(--red-wunz), var(--rust-orange));
+            border: none;
+            color: var(--bone-white);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ork-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--red-wunz);
+        }
+        
+        .code-block {
+            background: #1a1a1a;
+            border: 2px solid var(--ork-green);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        .component-section {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            border-left: 4px solid var(--red-wunz);
+            background: rgba(30, 58, 138, 0.1);
+        }
+        
+        .flow-diagram {
+            background: linear-gradient(45deg, var(--scrap-metal), var(--void-black));
+            border: 2px solid var(--yellow-teef);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .flow-arrow {
+            color: var(--red-wunz);
+            font-size: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .math-formula {
+            background: var(--mekboy-blue);
+            color: var(--bone-white);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .parameter-table {
+            background: var(--scrap-metal);
+            border: 2px solid var(--ork-green);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .parameter-table th {
+            background: var(--ork-green);
+            color: var(--bone-white);
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .parameter-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--ork-green);
+        }
+        
+        .ork-scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .ork-scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .toc {
+            position: sticky;
+            top: 100px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid var(--red-wunz);
+            border-radius: 8px;
+            padding: 1.5rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .toc a {
+            color: var(--bone-white);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--scrap-metal);
+        }
+        
+        .toc a:hover {
+            color: var(--yellow-teef);
+            padding-left: 0.5rem;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm border-b-2 border-red-600">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+                    <h1 class="ork-title text-2xl font-bold">ORKY TRANSFO'MA' DOCS</h1>
+                    <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="hover:text-red-400 transition-colors">Home</a>
+                    <a href="#overview" class="hover:text-red-400 transition-colors">Overview</a>
+                    <a href="#components" class="hover:text-red-400 transition-colors">Components</a>
+                    <a href="playground.html" class="hover:text-red-400 transition-colors">Playground</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Header -->
+    <section class="pt-32 pb-16 px-6 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="ork-title text-7xl font-bold mb-6 text-red-400">
+                TECHNICAL DOCUMENTATION
+            </h1>
+            <h2 class="ork-title text-4xl font-bold mb-8 text-yellow-400">
+                DA COMPLETE ORKY TRANSFO'MA' MANUAL!
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Dis 'ere document explains how da Orky Transformer works, from da ground up. Even a squig could understand it!
+            </p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="window.print()" class="ork-button px-6 py-3 rounded-lg">
+                    PRINT MANUAL
+                </button>
+                <a href="#overview" class="ork-button px-6 py-3 rounded-lg">
+                    START READIN'
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container mx-auto px-6 max-w-7xl">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Table of Contents -->
+            <div class="lg:col-span-1">
+                <div class="toc">
+                    <h3 class="ork-title text-xl font-bold mb-4 text-red-400">TABLE OF CONTENTS</h3>
+                    <a href="#overview">Overview & Architecture</a>
+                    <a href="#attention-head">OrkAttentionHead</a>
+                    <a href="#multihead-attention">MultiHeadOrkAttention</a>
+                    <a href="#feedforward">OrkFeedForward</a>
+                    <a href="#layernorm">OrkLayerNorm</a>
+                    <a href="#transformer-block">OrkyTransformerBlock</a>
+                    <a href="#transformer">OrkyTransformer</a>
+                    <a href="#mathematics">Mathematics</a>
+                    <a href="#examples">Usage Examples</a>
+                    <a href="#api">API Reference</a>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Overview -->
+                <section id="overview" class="ork-scroll-reveal component-section">
+                    <h2 class="ork-title text-5xl font-bold mb-6 text-green-400">OVERVIEW & ARCHITECTURE</h2>
+                    
+                    <div class="flow-diagram">
+                        <h3 class="ork-title text-2xl font-bold mb-4 text-center">DA ORKY TRANSFO'MA' ARCHITECTURE</h3>
+                        <div class="text-center">
+                            <div class="bg-gray-800 p-4 rounded-lg inline-block mb-4">
+                                <strong>Input Words → Embeddings + Positional Encoding</strong>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="bg-gray-800 p-4 rounded-lg inline-block mb-4">
+                                <strong>Multi-Head Ork Attention</strong>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="bg-gray-800 p-4 rounded-lg inline-block mb-4">
+                                <strong>Ork Feed-Forward Network</strong>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="bg-gray-800 p-4 rounded-lg inline-block mb-4">
+                                <strong>Repeat for Multiple Layers</strong>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="bg-gray-800 p-4 rounded-lg inline-block">
+                                <strong>Output Predictions</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg mb-4">
+                        Da Orky Transformer is built on da same principles as dem humie transformers, but made PROPPA ORKY! 
+                        Instead of fancy mathematical terms, we use Ork terminology dat even da dumbest grot can understand.
+                    </p>
+                    
+                    <h3 class="ork-title text-3xl font-bold mb-4 text-yellow-400">KEY FEATURES:</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6">
+                        <li><strong>Multi-Head Attention:</strong> Multiple Ork heads workin' together to figure out what's important</li>
+                        <li><strong>Feed-Forward Networks:</strong> Da Ork brain processin' center for deep thinkin'</li>
+                        <li><strong>Layer Normalization:</strong> Keepin' da Orks in line so dey don't get too crazy</li>
+                        <li><strong>Positional Encoding:</strong> Tellin' da Orks where each word is in da sentence</li>
+                        <li><strong>Orky Vocabulary:</strong> Built-in support for propa Orky language</li>
+                    </ul>
+                </section>
+                
+                <!-- OrkAttentionHead -->
+                <section id="attention-head" class="ork-scroll-reveal component-section">
+                    <h2 class="ork-title text-4xl font-bold mb-6 text-red-400">ORKATTENTIONHEAD</h2>
+                    
+                    <p class="text-lg mb-4">
+                        DIS IS A SINGLE ORK HEAD DAT LOOKS AT WORDS! Each Ork head has three jobs:
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-gray-800 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-yellow-400 mb-2">QUERY</h4>
+                            <p class="text-sm">"WOT AM I LOOKIN' FOR?"</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-yellow-400 mb-2">KEY</h4>
+                            <p class="text-sm">"WOT AM I?"</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-yellow-400 mb-2">VALUE</h4>
+                            <p class="text-sm">"WOT DO I KNOW?"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block p-4 mb-6">
+                        <pre><code class="language-python">class OrkAttentionHead(nn.Module):
+    def __init__(self, da_orky_model_size, da_orky_head_size):
+        super().__init__()
+        self.da_orky_head_size = da_orky_head_size
+        
+        # Dese 'ere are da Ork's three brain bitz
+        self.lookin_fer = nn.Linear(da_orky_model_size, da_orky_head_size)   # QUERY
+        self.wot_am_i = nn.Linear(da_orky_model_size, da_orky_head_size)     # KEY
+        self.wot_i_know = nn.Linear(da_orky_model_size, da_orky_head_size)   # VALUE
+    
+    def do_da_orky_finkin(self, da_wordz):
+        # Get da size of everything
+        batch_size, seq_len, da_orky_model_size = da_wordz.shape
+        
+        # STEP 1: Da Ork asks 'imself three questions
+        da_orky_queries = self.lookin_fer(da_wordz)
+        da_orky_keys = self.wot_am_i(da_wordz)
+        da_orky_values = self.wot_i_know(da_wordz)
+        
+        # STEP 2: Figure out how much each word matters
+        da_orky_scores = torch.matmul(da_orky_queries, da_orky_keys.transpose(-2, -1))
+        da_orky_scores = da_orky_scores / math.sqrt(self.da_orky_head_size)
+        
+        # STEP 3: Turn scores into probabilities
+        da_orky_attention_weights = F.softmax(da_orky_scores, dim=-1)
+        
+        # STEP 4: Combine all da information
+        da_orky_answer = torch.matmul(da_orky_attention_weights, da_orky_values)
+        
+        return da_orky_answer, da_orky_attention_weights</code></pre>
+                    </div>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-blue-400">HOW IT WORKS:</h3>
+                    <ol class="list-decimal list-inside space-y-2 mb-6">
+                        <li><strong>Query Generation:</strong> Each word asks "Wot am I lookin' fer?"</li>
+                        <li><strong>Key Generation:</strong> Each word defines "Wot am I?"</li>
+                        <li><strong>Value Generation:</strong> Each word provides "Wot information do I have?"</li>
+                        <li><strong>Attention Scoring:</strong> Calculate how much each word matches what we're lookin' for</li>
+                        <li><strong>Weight Normalization:</strong> Turn scores into probabilities (so dey add up to 1)</li>
+                        <li><strong>Information Combination:</strong> Combine all da values weighted by attention</li>
+                    </ol>
+                </section>
+                
+                <!-- MultiHeadOrkAttention -->
+                <section id="multihead-attention" class="ork-scroll-reveal component-section">
+                    <h2 class="ork-title text-4xl font-bold mb-6 text-red-400">MULTIHEADORKATTENTION</h2>
+                    
+                    <p class="text-lg mb-4">
+                        DIS IS WHERE WE GET A WHOLE MOB OF ORK HEADS WORKIN' TOGETHER! Instead of just one Ork tryin' to figure everything out, we get multiple Orks (heads) to look at da problem from different angles.
+                    </p>
+                    
+                    <div class="flow-diagram mb-6">
+                        <h3 class="ork-title text-xl font-bold mb-4 text-center">MULTI-HEAD ORK PROCESS</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="bg-gray-800 p-4 rounded-lg text-center">
+                                <h4 class="font-bold text-yellow-400 mb-2">HEAD 1</h4>
+                                <p class="text-sm">Focuses on verbs</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg text-center">
+                                <h4 class="font-bold text-yellow-400 mb-2">HEAD 2</h4>
+                                <p class="text-sm">Focuses on nouns</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg text-center">
+                                <h4 class="font-bold text-yellow-400 mb-2">HEAD 3</h4>
+                                <p class="text-sm">Focuses on relationships</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg text-center">
+                                <h4 class="font-bold text-yellow-400 mb-2">HEAD 4</h4>
+                                <p class="text-sm">Focuses on context</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="bg-gray-800 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-red-400 mb-2">BOSS ORK COMBINES ALL ANSWERS</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block p-4 mb-6">
+                        <pre><code class="language-python">class MultiHeadOrkAttention(nn.Module):
+    def __init__(self, da_orky_model_size, num_orky_heads):
+        super().__init__()
+        self.da_orky_model_size = da_orky_model_size
+        self.num_orky_heads = num_orky_heads
+        
+        # Each Ork head gets a piece of da model to work with
+        self.da_orky_head_size = da_orky_model_size // num_orky_heads
+        
+        # Create all da Ork heads - each one is a specialist!
+        self.da_orky_heads = nn.ModuleList([
+            OrkAttentionHead(da_orky_model_size, self.da_orky_head_size)
+            for _ in range(num_orky_heads)
+        ])
+        
+        # Dis is da Boss Ork who combines all da answers
+        self.da_boss_ork = nn.Linear(da_orky_model_size, da_orky_model_size)
+    
+    def do_da_mob_finkin(self, da_wordz):
+        # Each Ork head does his own thinkin'
+        da_orky_head_answers = []
+        all_da_orky_attention_weights = []
+        
+        for ork_head in self.da_orky_heads:
+            da_head_answer, da_head_attention = ork_head.do_da_orky_finkin(da_wordz)
+            da_orky_head_answers.append(da_head_answer)
+            all_da_orky_attention_weights.append(da_head_attention)
+        
+        # Combine all da Ork heads' answers
+        da_combined_orky_answers = torch.cat(da_orky_head_answers, dim=-1)
+        da_final_orky_answer = self.da_boss_ork(da_combined_orky_answers)
+        
+        return da_final_orky_answer, all_da_orky_attention_weights</code></pre>
+                    </div>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-blue-400">BENEFITS OF MULTI-HEAD ATTENTION:</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6">
+                        <li><strong>Different Perspectives:</strong> Each head learns different types of relationships</li>
+                        <li><strong>Better Representation:</strong> Combining multiple views gives richer understanding</li>
+                        <li><strong>Parallel Processing:</strong> All heads work at the same time for efficiency</li>
+                        <li><strong>Robust Learning:</strong> If one head gets confused, others can compensate</li>
+                    </ul>
+                </section>
+                
+                <!-- Mathematics Section -->
+                <section id="mathematics" class="ork-scroll-reveal component-section">
+                    <h2 class="ork-title text-4xl font-bold mb-6 text-red-400">DA MATH BEHIND DA ORKY MAGIC</h2>
+                    
+                    <p class="text-lg mb-6">
+                        Even Orks need some math to make their technology work! Here's da fancy equations behind da WAAAGH!
+                    </p>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-yellow-400">ATTENTION MECHANISM:</h3>
+                    <div class="math-formula">
+                        Attention(Q, K, V) = softmax(QK^T / √d_k)V
+                    </div>
+                    <p class="mb-6">
+                        Where Q is Query matrix, K is Key matrix, V is Value matrix, and d_k is da head size. Da scaling factor √d_k keeps da numbers from gettin' too big!
+                    </p>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-yellow-400">MULTI-HEAD ATTENTION:</h3>
+                    <div class="math-formula">
+                        MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O
+                    </div>
+                    <p class="mb-6">
+                        Where head_i = Attention(QW_i^Q, KW_i^K, VW_i^V) and W^O is da output projection matrix.
+                    </p>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-yellow-400">LAYER NORMALIZATION:</h3>
+                    <div class="math-formula">
+                        LayerNorm(x) = γ ⊙ (x - μ) / √(σ^2 + ε) + β
+                    </div>
+                    <p class="mb-6">
+                        Where μ is mean, σ is standard deviation, γ is scale parameter, β is shift parameter, and ε is a small number to prevent division by zero.
+                    </p>
+                </section>
+                
+                <!-- Usage Examples -->
+                <section id="examples" class="ork-scroll-reveal component-section">
+                    <h2 class="ork-title text-4xl font-bold mb-6 text-red-400">USAGE EXAMPLES</h2>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-yellow-400">CREATING A TRANSFORMER:</h3>
+                    <div class="code-block p-4 mb-6">
+                        <pre><code class="language-python"># Create your Orky Transformer
+da_orky_transformer = OrkyTransformer(
+    da_orky_vocab_size=1000,        # How many words da Orks know
+    da_orky_model_size=64,          # Size of da Ork brain
+    num_orky_heads=4,               # How many Ork heads work together
+    num_orky_layers=2,              # How many Ork transformer blocks
+    da_orky_feedforward_size=128,   # Size of da Ork brain processing center
+    da_max_orky_seq_len=10          # Maximum sentence length
+)
+
+# Use it to process Orky sentences
+input_sentence = ["<START>", "WAAAGH", "ORK", "FIGHT", "WIN", "<END>"]
+input_ids = [vocabulary[word] for word in input_sentence]
+input_tensor = torch.tensor([input_ids])
+
+# Get da Orky output
+output, attention_weights = da_orky_transformer.do_da_complete_orky_transfo_ma(input_tensor)</code></pre>
+                    </div>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-yellow-400">TRAINING THE TRANSFORMER:</h3>
+                    <div class="code-block p-4 mb-6">
+                        <pre><code class="language-python"># Example training loop (simplified)
+optimizer = torch.optim.Adam(da_orky_transformer.parameters())
+loss_function = nn.CrossEntropyLoss()
+
+for epoch in range(100):  # Train for 100 epochs
+    for batch in training_data:
+        # Forward pass
+        outputs, _ = da_orky_transformer(batch['input'])
+        
+        # Calculate loss
+        loss = loss_function(outputs.view(-1, vocab_size), batch['target'].view(-1))
+        
+        # Backward pass
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        
+        if epoch % 10 == 0:
+            print(f"Epoch {epoch}, Loss: {loss.item():.4f}")</code></pre>
+                    </div>
+                </section>
+                
+                <!-- API Reference -->
+                <section id="api" class="ork-scroll-reveal component-section">
+                    <h2 class="ork-title text-4xl font-bold mb-6 text-red-400">API REFERENCE</h2>
+                    
+                    <div class="parameter-table mb-6">
+                        <table class="w-full">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Default</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>da_orky_vocab_size</code></td>
+                                    <td>int</td>
+                                    <td>How many different words da Orks can understand</td>
+                                    <td>Required</td>
+                                </tr>
+                                <tr>
+                                    <td><code>da_orky_model_size</code></td>
+                                    <td>int</td>
+                                    <td>Size of da Ork brain (model dimension)</td>
+                                    <td>Required</td>
+                                </tr>
+                                <tr>
+                                    <td><code>num_orky_heads</code></td>
+                                    <td>int</td>
+                                    <td>How many Ork heads work together</td>
+                                    <td>Required</td>
+                                </tr>
+                                <tr>
+                                    <td><code>num_orky_layers</code></td>
+                                    <td>int</td>
+                                    <td>How many Ork transformer blocks to stack</td>
+                                    <td>Required</td>
+                                </tr>
+                                <tr>
+                                    <td><code>da_orky_feedforward_size</code></td>
+                                    <td>int</td>
+                                    <td>Size of da Ork brain processing center</td>
+                                    <td>Required</td>
+                                </tr>
+                                <tr>
+                                    <td><code>da_max_orky_seq_len</code></td>
+                                    <td>int</td>
+                                    <td>Maximum length of sentences da Orks can handle</td>
+                                    <td>Required</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="ork-title text-2xl font-bold mb-4 text-yellow-400">METHODS:</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="font-bold text-blue-400 mb-2">do_da_complete_orky_transfo_ma(da_wordz)</h4>
+                            <p class="mb-2">Process input words through da entire Orky Transformer</p>
+                            <p class="text-sm text-gray-400"><strong>Parameters:</strong> da_wordz (torch.Tensor) - Input tensor of word IDs</p>
+                            <p class="text-sm text-gray-400"><strong>Returns:</strong> Tuple of (output_tensor, attention_weights)</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="font-bold text-blue-400 mb-2">do_da_mob_finkin(da_wordz)</h4>
+                            <p class="mb-2">Multi-head attention mechanism - all Ork heads workin' together</p>
+                            <p class="text-sm text-gray-400"><strong>Parameters:</strong> da_wordz (torch.Tensor) - Input embeddings</p>
+                            <p class="text-sm text-gray-400"><strong>Returns:</strong> Tuple of (output, attention_weights)</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="font-bold text-blue-400 mb-2">do_da_orky_finkin(da_wordz)</h4>
+                            <p class="mb-2">Single Ork attention head doin' its thinkin'</p>
+                            <p class="text-sm text-gray-400"><strong>Parameters:</strong> da_wordz (torch.Tensor) - Input embeddings</p>
+                            <p class="text-sm text-gray-400"><strong>Returns:</strong> Tuple of (output, attention_weights)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-black py-12 px-6 border-t-2 border-red-600 mt-20">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center items-center space-x-4 mb-6">
+                <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+                <h3 class="ork-title text-3xl font-bold">WAAAGH!</h3>
+                <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+            </div>
+            <p class="text-lg text-gray-400 mb-4">
+                Now you know how da Orky Transformer works! Go forth and krump some code!
+            </p>
+            <p class="text-sm text-gray-500">
+                Documentation written by da Mekboyz for da glory of da WAAAGH!
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Scroll reveal functionality
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.ork-scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Highlight active section in TOC
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('text-yellow-400');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-yellow-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

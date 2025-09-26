@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORKY TRANSFO'MA' PLAYGROUND - EXPERIMENT WIF DA KODE!</title>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Orky Color Palette */
+        :root {
+            --ork-green: #2D5016;
+            --mekboy-blue: #1E3A8A;
+            --red-wunz: #DC2626;
+            --yellow-teef: #EAB308;
+            --rust-orange: #EA580C;
+            --scrap-metal: #6B7280;
+            --warp-purple: #7C3AED;
+            --bone-white: #F3F4F6;
+            --void-black: #0F172A;
+        }
+        
+        body {
+            background: var(--void-black);
+            color: var(--bone-white);
+            font-family: 'Quattrocento Sans', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .ork-title {
+            font-family: 'Oranienbaum', serif;
+            text-shadow: 3px 3px 0px var(--red-wunz), 6px 6px 0px var(--ork-green);
+            letter-spacing: 0.1em;
+        }
+        
+        .mekboy-panel {
+            background: linear-gradient(135deg, var(--mekboy-blue), var(--ork-green));
+            border: 3px solid var(--scrap-metal);
+            position: relative;
+        }
+        
+        .mekboy-panel::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--red-wunz), var(--yellow-teef), var(--mekboy-blue));
+            z-index: -1;
+            border-radius: inherit;
+        }
+        
+        .ork-button {
+            background: linear-gradient(45deg, var(--red-wunz), var(--rust-orange));
+            border: none;
+            color: var(--bone-white);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ork-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--red-wunz);
+        }
+        
+        .ork-button:disabled {
+            background: var(--scrap-metal);
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        
+        .code-editor {
+            border: 2px solid var(--ork-green);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .CodeMirror {
+            height: 400px;
+            font-size: 14px;
+        }
+        
+        .parameter-control {
+            background: var(--scrap-metal);
+            border: 2px solid var(--ork-green);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .slider-container {
+            margin: 1rem 0;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--scrap-metal);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--red-wunz);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--red-wunz);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--red-wunz);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px var(--red-wunz);
+        }
+        
+        .output-panel {
+            background: var(--void-black);
+            border: 2px solid var(--yellow-teef);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--scrap-metal);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red-wunz), var(--yellow-teef));
+            width: 0%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bone-white);
+            font-weight: bold;
+        }
+        
+        .ork-scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .ork-scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .visualization-container {
+            background: var(--scrap-metal);
+            border: 2px solid var(--ork-green);
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 300px;
+        }
+        
+        .token-display {
+            display: inline-block;
+            background: var(--ork-green);
+            color: var(--bone-white);
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .token-display:hover {
+            background: var(--red-wunz);
+            transform: translateY(-2px);
+        }
+        
+        .attention-line {
+            stroke: var(--mekboy-blue);
+            stroke-width: 2;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        
+        .attention-line:hover {
+            stroke: var(--red-wunz);
+            stroke-width: 4;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm border-b-2 border-red-600">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+                    <h1 class="ork-title text-2xl font-bold">ORKY PLAYGROUND</h1>
+                    <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="hover:text-red-400 transition-colors">Home</a>
+                    <a href="documentation.html" class="hover:text-red-400 transition-colors">Documentation</a>
+                    <a href="#playground" class="hover:text-red-400 transition-colors">Playground</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Header -->
+    <section class="pt-32 pb-16 px-6 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="ork-title text-7xl font-bold mb-6 text-red-400">
+                ORKY TRANSFO'MA' PLAYGROUND
+            </h1>
+            <h2 class="ork-title text-4xl font-bold mb-8 text-yellow-400">
+                EXPERIMENT WIF DA KODE AND SEE DA MAGIC!
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Dis 'ere playground lets you tweak da Orky Transformer parameters, run experiments, and see how da WAAAGH! works in real-time!
+            </p>
+        </div>
+    </section>
+    
+    <!-- Main Playground -->
+    <section id="playground" class="px-6 pb-20">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Parameter Controls -->
+                <div class="lg:col-span-1">
+                    <div class="mekboy-panel rounded-lg p-6 sticky top-24">
+                        <h3 class="ork-title text-2xl font-bold mb-6 text-center">ORKY PARAMETERS</h3>
+                        
+                        <div class="parameter-control">
+                            <label class="block text-sm font-bold mb-2">Vocabulary Size:</label>
+                            <div class="slider-container">
+                                <input type="range" id="vocab-size" class="slider" min="100" max="5000" value="1000" step="100">
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span>100</span>
+                                    <span id="vocab-size-value">1000</span>
+                                    <span>5000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-control">
+                            <label class="block text-sm font-bold mb-2">Model Size:</label>
+                            <div class="slider-container">
+                                <input type="range" id="model-size" class="slider" min="32" max="512" value="64" step="32">
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span>32</span>
+                                    <span id="model-size-value">64</span>
+                                    <span>512</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-control">
+                            <label class="block text-sm font-bold mb-2">Number of Heads:</label>
+                            <div class="slider-container">
+                                <input type="range" id="num-heads" class="slider" min="1" max="16" value="4" step="1">
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span>1</span>
+                                    <span id="num-heads-value">4</span>
+                                    <span>16</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-control">
+                            <label class="block text-sm font-bold mb-2">Number of Layers:</label>
+                            <div class="slider-container">
+                                <input type="range" id="num-layers" class="slider" min="1" max="12" value="2" step="1">
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span>1</span>
+                                    <span id="num-layers-value">2</span>
+                                    <span>12</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-control">
+                            <label class="block text-sm font-bold mb-2">Feed-Forward Size:</label>
+                            <div class="slider-container">
+                                <input type="range" id="ff-size" class="slider" min="64" max="1024" value="128" step="64">
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span>64</span>
+                                    <span id="ff-size-value">128</span>
+                                    <span>1024</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-control">
+                            <label class="block text-sm font-bold mb-2">Max Sequence Length:</label>
+                            <div class="slider-container">
+                                <input type="range" id="seq-len" class="slider" min="10" max="100" value="10" step="10">
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span>10</span>
+                                    <span id="seq-len-value">10</span>
+                                    <span>100</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="create-model" class="ork-button w-full py-3 rounded-lg mt-4">
+                            CREATE ORKY MODEL!
+                        </button>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-bold mb-2">Model Stats:</h4>
+                            <div class="bg-gray-800 p-3 rounded text-sm">
+                                <div>Parameters: <span id="param-count">0</span></div>
+                                <div>Memory: <span id="memory-usage">0 MB</span></div>
+                                <div>FLOPs: <span id="flops-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Code Editor and Execution -->
+                <div class="lg:col-span-2">
+                    <div class="mekboy-panel rounded-lg p-6 mb-8">
+                        <h3 class="ork-title text-2xl font-bold mb-6 text-center">ORKY KODE EDITOR</h3>
+                        
+                        <div class="code-editor mb-6">
+                            <textarea id="code-editor">
+# ORKY TRANSFO'MA' EXPERIMENT
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import math
+import numpy as np
+
+# Create a simple vocabulary
+da_orky_vocab = {
+    "WAAAGH": 0, "ORK": 1, "DAKKA": 2, "BOSS": 3,
+    "BOYZ": 4, "FIGHT": 5, "WIN": 6, "<PAD>": 7,
+    "<START>": 8, "<END>": 9
+}
+
+# Test sentence
+da_orky_sentence = ["<START>", "WAAAGH", "ORK", "FIGHT", "WIN", "<END>"]
+da_orky_sentence_ids = [da_orky_vocab[word] for word in da_orky_sentence]
+
+print("INPUT SENTENCE:", " ".join(da_orky_sentence))
+print("TOKEN IDS:", da_orky_sentence_ids)
+print("WAAAGH! Da Orky Transformer is ready to krump some words!")
+                            </textarea>
+                        </div>
+                        
+                        <div class="flex space-x-4 mb-6">
+                            <button id="run-code" class="ork-button px-6 py-3 rounded-lg">
+                                RUN DA KODE!
+                            </button>
+                            <button id="reset-code" class="ork-button px-6 py-3 rounded-lg">
+                                RESET KODE
+                            </button>
+                            <button id="save-code" class="ork-button px-6 py-3 rounded-lg">
+                                SAVE EXPERIMENT
+                            </button>
+                        </div>
+                        
+                        <div class="output-panel" id="code-output">
+# Output will appear here...
+# WAAAGH! Let's see what da Orks produce!
+                        </div>
+                    </div>
+                    
+                    <!-- Attention Visualization -->
+                    <div class="mekboy-panel rounded-lg p-6 mb-8">
+                        <h3 class="ork-title text-2xl font-bold mb-6 text-center">ATTENTION VISUALIZATION</h3>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold mb-4">Input Sentence:</h4>
+                                <div id="input-tokens" class="mb-4">
+                                    <!-- Tokens will be displayed here -->
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-bold mb-2">Select Layer:</label>
+                                    <select id="layer-select" class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                                        <option value="0">Layer 1</option>
+                                        <option value="1">Layer 2</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-bold mb-2">Select Head:</label>
+                                    <select id="head-select" class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
+                                        <option value="0">Head 1</option>
+                                        <option value="1">Head 2</option>
+                                        <option value="2">Head 3</option>
+                                        <option value="3">Head 4</option>
+                                    </select>
+                                </div>
+                                
+                                <button id="visualize-attention" class="ork-button w-full py-2 rounded-lg">
+                                    VISUALIZE ATTENTION!
+                                </button>
+                            </div>
+                            
+                            <div class="visualization-container">
+                                <div id="attention-heatmap" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Training Simulator -->
+                    <div class="mekboy-panel rounded-lg p-6">
+                        <h3 class="ork-title text-2xl font-bold mb-6 text-center">ORKY TRAINING SIMULATOR</h3>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div>
+                                <div class="parameter-control">
+                                    <label class="block text-sm font-bold mb-2">Learning Rate:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="learning-rate" class="slider" min="0.0001" max="0.01" value="0.001" step="0.0001">
+                                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                            <span>0.0001</span>
+                                            <span id="lr-value">0.001</span>
+                                            <span>0.01</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="parameter-control">
+                                    <label class="block text-sm font-bold mb-2">Batch Size:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="batch-size" class="slider" min="1" max="64" value="16" step="1">
+                                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                            <span>1</span>
+                                            <span id="batch-size-value">16</span>
+                                            <span>64</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="parameter-control">
+                                    <label class="block text-sm font-bold mb-2">Number of Epochs:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="num-epochs" class="slider" min="10" max="1000" value="100" step="10">
+                                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                            <span>10</span>
+                                            <span id="num-epochs-value">100</span>
+                                            <span>1000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button id="start-training" class="ork-button w-full py-3 rounded-lg">
+                                    START TRAINING!
+                                </button>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold mb-4">Training Progress:</h4>
+                                <div class="progress-bar">
+                                    <div id="training-progress" class="progress-fill">0%</div>
+                                </div>
+                                
+                                <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <div class="text-gray-400">Current Epoch:</div>
+                                            <div id="current-epoch" class="font-bold">0</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-gray-400">Loss:</div>
+                                            <div id="current-loss" class="font-bold">N/A</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-gray-400">Perplexity:</div>
+                                            <div id="current-ppl" class="font-bold">N/A</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-gray-400">Time Elapsed:</div>
+                                            <div id="time-elapsed" class="font-bold">0s</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="visualization-container">
+                                    <div id="training-chart" style="height: 200px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-black py-12 px-6 border-t-2 border-red-600">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center items-center space-x-4 mb-6">
+                <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+                <h3 class="ork-title text-3xl font-bold">WAAAGH!</h3>
+                <span style="font-size: 2rem; color: var(--yellow-teef); text-shadow: 0 0 10px var(--yellow-teef);">⚡</span>
+            </div>
+            <p class="text-lg text-gray-400 mb-4">
+                Experiment complete! Now go forth and krump some data with your new Orky knowledge!
+            </p>
+            <p class="text-sm text-gray-500">
+                Playground built by da Mekboyz for da glory of da WAAAGH!
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        class OrkyPlayground {
+            constructor() {
+                this.editor = null;
+                this.attentionChart = null;
+                this.trainingChart = null;
+                this.isTraining = false;
+                this.trainingData = [];
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupCodeEditor();
+                this.setupEventListeners();
+                this.setupCharts();
+                this.updateParameterDisplays();
+                this.generateAttentionData();
+            }
+            
+            setupCodeEditor() {
+                this.editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+                    mode: 'python',
+                    theme: 'monokai',
+                    lineNumbers: true,
+                    autoCloseBrackets: true,
+                    matchBrackets: true,
+                    indentUnit: 4,
+                    tabSize: 4,
+                    lineWrapping: true
+                });
+            }
+            
+            setupEventListeners() {
+                // Parameter sliders
+                const sliders = ['vocab-size', 'model-size', 'num-heads', 'num-layers', 'ff-size', 'seq-len', 'learning-rate', 'batch-size', 'num-epochs'];
+                sliders.forEach(sliderId => {
+                    const slider = document.getElementById(sliderId);
+                    if (slider) {
+                        slider.addEventListener('input', (e) => {
+                            const valueSpan = document.getElementById(sliderId.replace('-', '-') + '-value');
+                            if (valueSpan) {
+                                valueSpan.textContent = e.target.value;
+                            }
+                            this.updateModelStats();
+                        });
+                    }
+                });
+                
+                // Buttons
+                document.getElementById('create-model').addEventListener('click', () => this.createModel());
+                document.getElementById('run-code').addEventListener('click', () => this.runCode());
+                document.getElementById('reset-code').addEventListener('click', () => this.resetCode());
+                document.getElementById('save-code').addEventListener('click', () => this.saveCode());
+                document.getElementById('visualize-attention').addEventListener('click', () => this.visualizeAttention());
+                document.getElementById('start-training').addEventListener('click', () => this.startTraining());
+                
+                // Layer and head selectors
+                document.getElementById('layer-select').addEventListener('change', () => this.updateAttentionVisualization());
+                document.getElementById('head-select').addEventListener('change', () => this.updateAttentionVisualization());
+            }
+            
+            setupCharts() {
+                // Attention heatmap chart
+                const attentionDom = document.getElementById('attention-heatmap');
+                this.attentionChart = echarts.init(attentionDom);
+                
+                // Training progress chart
+                const trainingDom = document.getElementById('training-chart');
+                this.trainingChart = echarts.init(trainingDom);
+                
+                this.initializeCharts();
+            }
+            
+            initializeCharts() {
+                // Initialize attention chart
+                const attentionOption = {
+                    title: {
+                        text: 'Click "Visualize Attention" to see Orky magic!',
+                        textStyle: { color: '#EAB308', fontSize: 14 }
+                    },
+                    grid: { show: false }
+                };
+                this.attentionChart.setOption(attentionOption);
+                
+                // Initialize training chart
+                const trainingOption = {
+                    title: {
+                        text: 'Training Progress',
+                        textStyle: { color: '#EAB308', fontSize: 14 }
+                    },
+                    tooltip: { trigger: 'axis' },
+                    xAxis: {
+                        type: 'category',
+                        data: [],
+                        axisLabel: { color: '#F3F4F6' }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        axisLabel: { color: '#F3F4F6' }
+                    },
+                    series: [{
+                        name: 'Loss',
+                        type: 'line',
+                        data: [],
+                        smooth: true,
+                        lineStyle: { color: '#DC2626' },
+                        itemStyle: { color: '#DC2626' }
+                    }]
+                };
+                this.trainingChart.setOption(trainingOption);
+            }
+            
+            updateParameterDisplays() {
+                const sliders = ['vocab-size', 'model-size', 'num-heads', 'num-layers', 'ff-size', 'seq-len', 'learning-rate', 'batch-size', 'num-epochs'];
+                sliders.forEach(sliderId => {
+                    const slider = document.getElementById(sliderId);
+                    const valueSpan = document.getElementById(sliderId.replace('-', '-') + '-value');
+                    if (slider && valueSpan) {
+                        valueSpan.textContent = slider.value;
+                    }
+                });
+                this.updateModelStats();
+            }
+            
+            updateModelStats() {
+                const vocabSize = parseInt(document.getElementById('vocab-size').value);
+                const modelSize = parseInt(document.getElementById('model-size').value);
+                const numHeads = parseInt(document.getElementById('num-heads').value);
+                const numLayers = parseInt(document.getElementById('num-layers').value);
+                const ffSize = parseInt(document.getElementById('ff-size').value);
+                const seqLen = parseInt(document.getElementById('seq-len').value);
+                
+                // Calculate approximate parameter count
+                const embeddingParams = vocabSize * modelSize;
+                const attentionParams = numLayers * (4 * modelSize * modelSize + 2 * modelSize); // Q, K, V, O projections
+                const ffParams = numLayers * (2 * modelSize * ffSize + modelSize + ffSize); // Two linear layers
+                const layerNormParams = numLayers * 2 * 2 * modelSize; // Two layer norms per layer
+                const outputParams = modelSize * vocabSize;
+                
+                const totalParams = embeddingParams + attentionParams + ffParams + layerNormParams + outputParams;
+                const memoryUsage = (totalParams * 4) / (1024 * 1024); // Assuming float32
+                const flops = seqLen * seqLen * modelSize * numHeads * numLayers; // Rough estimate
+                
+                document.getElementById('param-count').textContent = totalParams.toLocaleString();
+                document.getElementById('memory-usage').textContent = memoryUsage.toFixed(1);
+                document.getElementById('flops-count').textContent = flops.toLocaleString();
+            }
+            
+            createModel() {
+                const vocabSize = document.getElementById('vocab-size').value;
+                const modelSize = document.getElementById('model-size').value;
+                const numHeads = document.getElementById('num-heads').value;
+                const numLayers = document.getElementById('num-layers').value;
+                const ffSize = document.getElementById('ff-size').value;
+                const seqLen = document.getElementById('seq-len').value;
+                
+                const code = `# ORKY TRANSFO'MA' v${Math.floor(Math.random() * 100) + 1}.${Math.floor(Math.random() * 10)}
+# Created with ${vocabSize} vocabulary, ${modelSize} model size, ${numHeads} heads, ${numLayers} layers
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import math
+
+# Model Configuration
+da_orky_vocab_size = ${vocabSize}
+da_orky_model_size = ${modelSize}
+num_orky_heads = ${numHeads}
+num_orky_layers = ${numLayers}
+da_orky_feedforward_size = ${ffSize}
+da_max_orky_seq_len = ${seqLen}
+
+print(f"Creating Orky Transformer with:")
+print(f"- Vocabulary size: {da_orky_vocab_size}")
+print(f"- Model dimension: {da_orky_model_size}")
+print(f"- Number of heads: {num_orky_heads}")
+print(f"- Number of layers: {num_orky_layers}")
+print(f"- Feed-forward size: {da_orky_feedforward_size}")
+print(f"- Max sequence length: {da_max_orky_seq_len}")
+
+# Your Orky Transformer code here...
+print("WAAAGH! Model created successfully!")`;
+                
+                this.editor.setValue(code);
+                this.showNotification('Orky model configuration created! WAAAGH!', 'success');
+            }
+            
+            runCode() {
+                const code = this.editor.getValue();
+                const output = document.getElementById('code-output');
+                
+                // Simulate code execution
+                output.textContent = 'Running Orky code...\n';
+                output.textContent += '=====================================\n\n';
+                
+                // Parse the code and extract configuration
+                const lines = code.split('\n');
+                let config = {};
+                
+                lines.forEach(line => {
+                    if (line.includes('da_orky_vocab_size')) {
+                        const match = line.match(/= (\d+)/);
+                        if (match) config.vocabSize = match[1];
+                    }
+                    if (line.includes('da_orky_model_size')) {
+                        const match = line.match(/= (\d+)/);
+                        if (match) config.modelSize = match[1];
+                    }
+                });
+                
+                // Simulate execution output
+                setTimeout(() => {
+                    output.textContent += `Creating Orky Transformer with:\n`;
+                    output.textContent += `- Vocabulary size: ${config.vocabSize || '1000'}\n`;
+                    output.textContent += `- Model dimension: ${config.modelSize || '64'}\n`;
+                    output.textContent += `- Number of heads: ${config.numHeads || '4'}\n`;
+                    output.textContent += `- Number of layers: ${config.numLayers || '2'}\n\n`;
+                    output.textContent += `WAAAGH! Orky Transformer initialized successfully!\n`;
+                    output.textContent += `Ready to process ${config.vocabSize || '1000'} different Orky words!\n`;
+                    output.textContent += `Model has approximately ${this.calculateParameters(config)} parameters.\n`;
+                }, 1000);
+                
+                this.showNotification('Orky code executed successfully!', 'success');
+            }
+            
+            calculateParameters(config) {
+                const vocab = parseInt(config.vocabSize) || 1000;
+                const model = parseInt(config.modelSize) || 64;
+                const heads = parseInt(config.numHeads) || 4;
+                const layers = parseInt(config.numLayers) || 2;
+                const ff = parseInt(config.ffSize) || 128;
+                
+                // Simplified parameter calculation
+                return (vocab * model + layers * (4 * model * model + 2 * model * ff)).toLocaleString();
+            }
+            
+            resetCode() {
+                const defaultCode = `# ORKY TRANSFO'MA' EXPERIMENT
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import math
+import numpy as np
+
+# Create a simple vocabulary
+da_orky_vocab = {
+    "WAAAGH": 0, "ORK": 1, "DAKKA": 2, "BOSS": 3,
+    "BOYZ": 4, "FIGHT": 5, "WIN": 6, "<PAD>": 7,
+    "<START>": 8, "<END>": 9
+}
+
+# Test sentence
+da_orky_sentence = ["<START>", "WAAAGH", "ORK", "FIGHT", "WIN", "<END>"]
+da_orky_sentence_ids = [da_orky_vocab[word] for word in da_orky_sentence]
+
+print("INPUT SENTENCE:", " ".join(da_orky_sentence))
+print("TOKEN IDS:", da_orky_sentence_ids)
+print("WAAAGH! Da Orky Transformer is ready to krump some words!")`;
+                
+                this.editor.setValue(defaultCode);
+                this.showNotification('Code reset to default Orky example!', 'info');
+            }
+            
+            saveCode() {
+                const code = this.editor.getValue();
+                const blob = new Blob([code], { type: 'text/python' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'orky_transformer_experiment.py';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                this.showNotification('Orky experiment saved!', 'success');
+            }
+            
+            generateAttentionData() {
+                const tokens = ['<START>', 'WAAAGH', 'ORK', 'FIGHT', 'WIN', '<END>'];
+                const container = document.getElementById('input-tokens');
+                container.innerHTML = '';
+                
+                tokens.forEach((token, index) => {
+                    const tokenDiv = document.createElement('div');
+                    tokenDiv.className = 'token-display';
+                    tokenDiv.textContent = `${token} (${index})`;
+                    container.appendChild(tokenDiv);
+                });
+            }
+            
+            visualizeAttention() {
+                const tokens = ['<START>', 'WAAAGH', 'ORK', 'FIGHT', 'WIN', '<END>'];
+                const attentionData = this.generateRandomAttention(tokens.length);
+                
+                const option = {
+                    title: {
+                        text: 'ORK ATTENTION PATTERNS',
+                        textStyle: { color: '#EAB308', fontSize: 16 }
+                    },
+                    tooltip: {
+                        position: 'top',
+                        formatter: function(params) {
+                            return `From "${tokens[params.data[1]]}" to "${tokens[params.data[0]]}": ${(params.data[2] * 100).toFixed(1)}% attention`;
+                        }
+                    },
+                    grid: {
+                        height: '70%',
+                        top: '15%',
+                        left: '10%',
+                        right: '10%'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: tokens,
+                        splitArea: { show: true },
+                        axisLabel: { color: '#F3F4F6', rotate: 45 }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: tokens,
+                        splitArea: { show: true },
+                        axisLabel: { color: '#F3F4F6' }
+                    },
+                    visualMap: {
+                        min: 0,
+                        max: 1,
+                        calculable: true,
+                        orient: 'horizontal',
+                        left: 'center',
+                        bottom: '5%',
+                        inRange: {
+                            color: ['#1E3A8A', '#DC2626', '#EAB308']
+                        },
+                        textStyle: { color: '#F3F4F6' }
+                    },
+                    series: [{
+                        name: 'Attention Weight',
+                        type: 'heatmap',
+                        data: attentionData,
+                        label: { show: false },
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(220, 38, 38, 0.5)'
+                            }
+                        }
+                    }]
+                };
+                
+                this.attentionChart.setOption(option, true);
+                this.showNotification('Attention visualization updated! WAAAGH!', 'success');
+            }
+            
+            generateRandomAttention(n) {
+                const data = [];
+                for (let i = 0; i < n; i++) {
+                    for (let j = 0; j < n; j++) {
+                        let weight = Math.random() * 0.5 + 0.1;
+                        if (i === j) weight = Math.random() * 0.3 + 0.7;
+                        if (Math.abs(i - j) === 1) weight += 0.2;
+                        data.push([i, j, Math.min(weight, 1)]);
+                    }
+                }
+                return data;
+            }
+            
+            updateAttentionVisualization() {
+                // This would update based on selected layer and head
+                this.visualizeAttention();
+            }
+            
+            startTraining() {
+                if (this.isTraining) {
+                    this.stopTraining();
+                    return;
+                }
+                
+                this.isTraining = true;
+                const button = document.getElementById('start-training');
+                button.textContent = 'STOP TRAINING!';
+                button.style.background = 'var(--rust-orange)';
+                
+                this.trainingData = [];
+                this.simulateTraining();
+            }
+            
+            stopTraining() {
+                this.isTraining = false;
+                const button = document.getElementById('start-training');
+                button.textContent = 'START TRAINING!';
+                button.style.background = '';
+            }
+            
+            simulateTraining() {
+                if (!this.isTraining) return;
+                
+                const numEpochs = parseInt(document.getElementById('num-epochs').value);
+                const currentEpoch = this.trainingData.length + 1;
+                
+                if (currentEpoch > numEpochs) {
+                    this.stopTraining();
+                    this.showNotification('Training complete! WAAAGH!', 'success');
+                    return;
+                }
+                
+                // Simulate training progress
+                const loss = Math.max(0.1, 5.0 * Math.exp(-currentEpoch / 20) + Math.random() * 0.1);
+                const perplexity = Math.exp(loss);
+                
+                this.trainingData.push({
+                    epoch: currentEpoch,
+                    loss: loss,
+                    perplexity: perplexity
+                });
+                
+                // Update UI
+                document.getElementById('current-epoch').textContent = currentEpoch;
+                document.getElementById('current-loss').textContent = loss.toFixed(4);
+                document.getElementById('current-ppl').textContent = perplexity.toFixed(2);
+                document.getElementById('time-elapsed').textContent = `${currentEpoch}s`;
+                
+                const progress = (currentEpoch / numEpochs) * 100;
+                const progressBar = document.getElementById('training-progress');
+                progressBar.style.width = `${progress}%`;
+                progressBar.textContent = `${Math.round(progress)}%`;
+                
+                // Update chart
+                const option = {
+                    xAxis: {
+                        data: this.trainingData.map(d => d.epoch)
+                    },
+                    series: [{
+                        data: this.trainingData.map(d => d.loss)
+                    }]
+                };
+                this.trainingChart.setOption(option);
+                
+                // Continue training
+                setTimeout(() => this.simulateTraining(), 200);
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-24 right-6 z-50 p-4 rounded-lg shadow-lg max-w-sm ${
+                    type === 'success' ? 'bg-green-600' :
+                    type === 'warning' ? 'bg-yellow-600' :
+                    type === 'error' ? 'bg-red-600' : 'bg-blue-600'
+                }`;
+                notification.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl">${
+                            type === 'success' ? '✅' :
+                            type === 'warning' ? '⚠️' :
+                            type === 'error' ? '❌' : 'ℹ️'
+                        }</span>
+                        <span class="font-bold">${message}</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Animate in
+                anime({
+                    targets: notification,
+                    translateX: [300, 0],
+                    opacity: [0, 1],
+                    duration: 300,
+                    easing: 'easeOutBack'
+                });
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    anime({
+                        targets: notification,
+                        translateX: [0, 300],
+                        opacity: [1, 0],
+                        duration: 300,
+                        easing: 'easeInBack',
+                        complete: () => {
+                            notification.remove();
+                        }
+                    });
+                }, 3000);
+            }
+        }
+        
+        // Initialize playground when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new OrkyPlayground();
+        });
+    </script>
+</body>
+</html>

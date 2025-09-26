@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORKY TRANSFO'MA' v1.2 - A PROPPA ORKY WARHAMMER 40K TRANSFORMER!</title>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.3.2/pixi.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Orky Color Palette */
+        :root {
+            --ork-green: #2D5016;
+            --mekboy-blue: #1E3A8A;
+            --red-wunz: #DC2626;
+            --yellow-teef: #EAB308;
+            --rust-orange: #EA580C;
+            --scrap-metal: #6B7280;
+            --warp-purple: #7C3AED;
+            --bone-white: #F3F4F6;
+            --void-black: #0F172A;
+        }
+        
+        body {
+            background: var(--void-black);
+            color: var(--bone-white);
+            font-family: 'Quattrocento Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .ork-title {
+            font-family: 'Oranienbaum', serif;
+            text-shadow: 3px 3px 0px var(--red-wunz), 6px 6px 0px var(--ork-green);
+            letter-spacing: 0.1em;
+        }
+        
+        .scrap-metal-bg {
+            background: linear-gradient(45deg, var(--scrap-metal), var(--rust-orange));
+            position: relative;
+        }
+        
+        .scrap-metal-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="rust" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="2" fill="%23EA580C" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23rust)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .ork-glyph {
+            font-size: 2rem;
+            color: var(--yellow-teef);
+            text-shadow: 0 0 10px var(--yellow-teef);
+            animation: glyph-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes glyph-pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .waaagh-glow {
+            box-shadow: 0 0 20px var(--red-wunz), inset 0 0 20px rgba(220, 38, 38, 0.1);
+            border: 2px solid var(--red-wunz);
+        }
+        
+        .mekboy-panel {
+            background: linear-gradient(135deg, var(--mekboy-blue), var(--ork-green));
+            border: 3px solid var(--scrap-metal);
+            position: relative;
+        }
+        
+        .mekboy-panel::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--red-wunz), var(--yellow-teef), var(--mekboy-blue));
+            z-index: -1;
+            border-radius: inherit;
+        }
+        
+        .ork-button {
+            background: linear-gradient(45deg, var(--red-wunz), var(--rust-orange));
+            border: none;
+            color: var(--bone-white);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ork-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--red-wunz);
+        }
+        
+        .ork-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .ork-button:hover::before {
+            left: 100%;
+        }
+        
+        .attention-heatmap {
+            background: radial-gradient(circle at center, var(--red-wunz), var(--mekboy-blue));
+            border: 2px solid var(--yellow-teef);
+        }
+        
+        .transformer-component {
+            background: var(--scrap-metal);
+            border: 2px solid var(--ork-green);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .transformer-component:hover {
+            border-color: var(--red-wunz);
+            box-shadow: 0 0 15px var(--red-wunz);
+            transform: scale(1.05);
+        }
+        
+        .ork-vocab-word {
+            background: var(--ork-green);
+            border: 1px solid var(--yellow-teef);
+            color: var(--bone-white);
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border-radius: 4px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ork-vocab-word:hover {
+            background: var(--red-wunz);
+            transform: translateY(-2px);
+        }
+        
+        .energy-flow {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(90deg, transparent, var(--mekboy-blue), transparent);
+            animation: energy-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes energy-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--yellow-teef);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--yellow-teef); }
+        }
+        
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .ork-scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .ork-scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particle-container" class="particle-container"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm border-b-2 border-red-600">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <span class="ork-glyph">⚡</span>
+                    <h1 class="ork-title text-2xl font-bold">ORKY TRANSFO'MA'</h1>
+                    <span class="ork-glyph">⚡</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#home" class="hover:text-red-400 transition-colors">Home</a>
+                    <a href="documentation.html" class="hover:text-red-400 transition-colors">Documentation</a>
+                    <a href="playground.html" class="hover:text-red-400 transition-colors">Playground</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style="background-image: url('hero-main.png');"></div>
+        <div class="relative z-10 text-center max-w-6xl mx-auto px-6">
+            <h1 class="ork-title text-8xl font-bold mb-6 text-red-400">
+                ORKY TRANSFO'MA'
+            </h1>
+            <h2 class="ork-title text-4xl font-bold mb-8 text-yellow-400">
+                v1.2 - A PROPPA ORKY WARHAMMER 40K TRANSFORMER!
+            </h2>
+            <div class="typewriter text-2xl mb-8 text-blue-300 mx-auto max-w-4xl">
+                Da Orky Transfo'ma' works by havin' lots of Ork heads lookin' at words and figurin' out which words is most important to each other...
+            </div>
+            <div class="flex justify-center space-x-6">
+                <button id="start-exploring" class="ork-button px-8 py-4 text-xl rounded-lg">
+                    START DA WAAAGH!
+                </button>
+                <button id="view-code" class="ork-button px-8 py-4 text-xl rounded-lg">
+                    VIEW DA KODE
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Transformer Section -->
+    <section id="transformer-section" class="py-20 px-6 ork-scroll-reveal">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="ork-title text-6xl font-bold text-center mb-16 text-green-400">
+                DA ORKY TRANSFO'MA' IN ACTION!
+            </h2>
+            
+            <!-- Architecture Diagram -->
+            <div class="mekboy-panel rounded-lg p-8 mb-12">
+                <h3 class="ork-title text-3xl font-bold mb-8 text-center">CLICK ON DA COMPONENTS TO LEARN MORE!</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="transformer-components">
+                    <!-- Components will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Attention Visualizer -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="mekboy-panel rounded-lg p-6">
+                    <h3 class="ork-title text-2xl font-bold mb-6">TRY YA OWN ORKY SENTENCE!</h3>
+                    <div class="mb-4">
+                        <input type="text" id="orky-input" placeholder="Enter yer Orky sentence..." 
+                               class="w-full p-4 bg-gray-800 border-2 border-yellow-400 rounded-lg text-white placeholder-gray-400">
+                    </div>
+                    <button id="analyze-attention" class="ork-button px-6 py-3 rounded-lg w-full">
+                        ANALYZE ATTENTION!
+                    </button>
+                    <div id="tokenized-words" class="mt-4 flex flex-wrap">
+                        <!-- Tokenized words will appear here -->
+                    </div>
+                </div>
+                
+                <div class="mekboy-panel rounded-lg p-6">
+                    <h3 class="ork-title text-2xl font-bold mb-6">ATTENTION HEATMAP</h3>
+                    <div id="attention-chart" class="attention-heatmap rounded-lg" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Ork Vocabulary Builder -->
+    <section id="vocabulary-section" class="py-20 px-6 bg-gray-900 ork-scroll-reveal">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="ork-title text-6xl font-bold text-center mb-16 text-yellow-400">
+                BUILD YA ORK VOCABULARY!
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="mekboy-panel rounded-lg p-6">
+                    <h3 class="ork-title text-2xl font-bold mb-6">ADD NEW ORKY WORDS</h3>
+                    <div class="mb-4">
+                        <input type="text" id="new-word-input" placeholder="Enter new Orky word..." 
+                               class="w-full p-3 bg-gray-800 border-2 border-blue-400 rounded-lg text-white placeholder-gray-400">
+                    </div>
+                    <div class="mb-4">
+                        <input type="text" id="word-meaning" placeholder="What does it mean?" 
+                               class="w-full p-3 bg-gray-800 border-2 border-blue-400 rounded-lg text-white placeholder-gray-400">
+                    </div>
+                    <button id="add-word" class="ork-button px-6 py-3 rounded-lg w-full">
+                        ADD TO VOCABULARY!
+                    </button>
+                </div>
+                
+                <div class="mekboy-panel rounded-lg p-6">
+                    <h3 class="ork-title text-2xl font-bold mb-6">CURRENT VOCABULARY</h3>
+                    <div id="vocabulary-display" class="max-h-96 overflow-y-auto">
+                        <!-- Vocabulary words will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Code Showcase -->
+    <section id="code-section" class="py-20 px-6 ork-scroll-reveal">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="ork-title text-6xl font-bold text-center mb-16 text-red-400">
+                DA MAGNIFICENT KODE!
+            </h2>
+            
+            <div class="mekboy-panel rounded-lg p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="ork-title text-2xl font-bold mb-4">ORK ATTENTION HEAD</h3>
+                        <pre class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm"><code class="text-green-400">class OrkAttentionHead(nn.Module):
+    """
+    DIS IS A SINGLE ORK HEAD DAT LOOKS AT WORDS!
+    Each Ork head has three jobs:
+    1. QUERY: "WOT AM I LOOKIN' FOR?"
+    2. KEY: "WOT AM I?"
+    3. VALUE: "WOT DO I KNOW?"
+    """
+    
+    def __init__(self, da_orky_model_size, da_orky_head_size):
+        super().__init__()
+        self.da_orky_head_size = da_orky_head_size
+        
+        # Dese 'ere are da Ork's three brain bitz
+        self.lookin_fer = nn.Linear(da_orky_model_size, da_orky_head_size)
+        self.wot_am_i = nn.Linear(da_orky_model_size, da_orky_head_size)  
+        self.wot_i_know = nn.Linear(da_orky_model_size, da_orky_head_size)</code></pre>
+                    </div>
+                    
+                    <div>
+                        <h3 class="ork-title text-2xl font-bold mb-4">MULTI-HEAD ATTENTION</h3>
+                        <pre class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm"><code class="text-blue-400">class MultiHeadOrkAttention(nn.Module):
+    """
+    DIS IS WHERE WE GET A WHOLE MOB OF ORK HEADS WORKIN' TOGETHER!
+    Instead of just one Ork tryin' to figure everything out,
+    we get multiple Orks to look at da problem from different angles.
+    """
+    
+    def do_da_mob_finkin(self, da_wordz):
+        # Each Ork head does his own thinkin'
+        da_orky_head_answers = []
+        for ork_head in self.da_orky_heads:
+            da_head_answer, da_head_attention = ork_head.do_da_orky_finkin(da_wordz)
+            da_orky_head_answers.append(da_head_answer)
+        
+        # Combine all da Ork heads' answers
+        da_combined_orky_answers = torch.cat(da_orky_head_answers, dim=-1)
+        da_final_orky_answer = self.da_boss_ork(da_combined_orky_answers)
+        
+        return da_final_orky_answer, all_da_orky_attention_weights</code></pre>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <button id="copy-code" class="ork-button px-8 py-4 text-lg rounded-lg">
+                        COPY ALL DA KODE!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-black py-12 px-6 border-t-2 border-red-600">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center items-center space-x-4 mb-6">
+                <span class="ork-glyph">⚡</span>
+                <h3 class="ork-title text-3xl font-bold">WAAAGH!</h3>
+                <span class="ork-glyph">⚡</span>
+            </div>
+            <p class="text-lg text-gray-400 mb-4">
+                Da Orky Transfo'ma' - Where Ork belief makes technology work!
+            </p>
+            <p class="text-sm text-gray-500">
+                Built by da Mekboyz for da WAAAGH! against boring AI.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Component Explanation Modal -->
+    <div id="component-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="mekboy-panel rounded-lg p-8 max-w-2xl mx-4 max-h-96 overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modal-title" class="ork-title text-3xl font-bold"></h3>
+                <button id="close-modal" class="text-red-400 hover:text-red-300 text-2xl">&times;</button>
+            </div>
+            <div id="modal-content" class="text-lg leading-relaxed">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
