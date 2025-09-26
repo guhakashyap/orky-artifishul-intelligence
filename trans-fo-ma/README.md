@@ -1,50 +1,66 @@
-# ORKY TRANSFORMERS - DA ULTIMATE ORK WAR MACHINES! 🚀
+# ORKY TRANSFO'MA' - DA ULTIMATE ORK WAR MACHINES! 🚀
 
-DIS IS DA CLEAN, ORGANIZED COLLECTION OF ORKY TRANSFORMERS - FROM BASIC ORKS TO MASSIVE GARGANTS!
+DIS IS DA CLEAN, ORGANIZED COLLECTION OF ORKY TRANSFORMERS - FROM BASIC ORKS TO ADVANCED TRANSFO'MA'!
 
-## DA ORKY TRANSFORMERS COLLECTION
+## DA ORKY TRANSFO'MA' COLLECTION
 
-### 1. `mamba/` - DA MORKY MAMBA SUBFOLDER! 🧠
-- **What it is**: A State Space Model with selective memory (from the repo)
-- **Location**: `transformers/mamba/`
-- **Files**: 
-  - `morky_mamba1.0.py` - The Morky Mamba implementation
-  - `README.md` - Detailed Mamba documentation
+### 1. `trans-fo-ma1.2.py` - DA ORKY TRANSFO'MA' WIF EDUCATIVE COMMENTS! 🧠
+- **What it is**: A complete Transformer implementation with detailed Orky comments
 - **Features**:
-  - **Selective Memory**: Orks remember important stuff and forget boring stuff
-  - **Sequential Processing**: Orks process words one by one
-  - **State Space Model**: Advanced memory management
-  - **Efficient Processing**: Better for long sequences
-- **Best for**: Learning sequential processing and selective memory
+  - **Multi-Head Attention**: Orks work together to focus on important words
+  - **Parallel Processing**: All Orks work at the same time
+  - **Attention Mechanisms**: Orks can focus on relationships between words
+  - **Feed-Forward Networks**: Orks process information through multiple layers
+- **Best for**: Learning transformer architecture and attention mechanisms
 - **Orky Level**: Ork Nob (Advanced!)
+
+### 2. `trans-fo-ma1.3.py` - DA ADVANCED ORKY TRANSFO'MA' WIF CAUSAL MASKING! 🚀
+- **What it is**: An improved Transformer with causal masking to prevent peeking at future words
+- **Features**:
+  - **Causal Masking**: Orks can't cheat by looking at future words
+  - **No-Peek Mask**: Prevents attention to future tokens during training
+  - **Autoregressive Generation**: Orks predict one word at a time
+  - **All v1.2 Features**: Plus the advanced masking
+- **Best for**: Learning proper transformer training and causal attention
+- **Orky Level**: Ork Warboss (Expert!)
 
 ## 📁 **CLEAN FILE STRUCTURE**
 
 ```
-transformers/
+trans-fo-ma/
 ├── README.md                    # This file - documentation for all transformers
+├── trans-fo-ma1.2.py          # Basic transformer with educative comments
+├── trans-fo-ma1.3.py          # Advanced transformer with causal masking
 ├── quick_orky_demo.py         # Quick demonstration script
-└── mamba/                       # DA MORKY MAMBA SUBFOLDER! 🧠
-    ├── README.md               # Mamba-specific documentation
-    └── morky_mamba1.0.py       # Morky Mamba with selective memory
+└── website/                     # Documentation and visualizations
+    ├── index.html              # Interactive transformer playground
+    ├── playground.html         # Transformer visualization
+    └── [various assets]        # Images and documentation
 ```
 
 ## 🎯 **EDUCATIONAL PROGRESSION**
 
-### **Level 1: Morky Mamba (Ork Nob)**  
-- **Learn**: Sequential processing, selective memory, state space models
-- **Run**: `python morky_mamba1.0.py`
-- **Key Features**: Selective memory, sequential processing, efficient long sequences
+### **Level 1: Transfo'ma' v1.2 (Ork Nob)**  
+- **Learn**: Transformer architecture, attention mechanisms, parallel processing
+- **Run**: `python trans-fo-ma1.2.py`
+- **Key Features**: Multi-head attention, feed-forward networks, parallel processing
 
+### **Level 2: Transfo'ma' v1.3 (Ork Warboss)**  
+- **Learn**: Causal masking, autoregressive generation, proper training
+- **Run**: `python trans-fo-ma1.3.py`
+- **Key Features**: Causal masking, no-peek attention, autoregressive generation
 
 ## 🚀 **QUICK START**
 
-### **Morky Mamba (Sequential Processing)**
+### **Basic Transfo'ma' (Parallel Processing)**
 ```bash
-cd mamba/
-python morky_mamba1.0.py
+python trans-fo-ma1.2.py
 ```
 
+### **Advanced Transfo'ma' (Causal Masking)**
+```bash
+python trans-fo-ma1.3.py
+```
 
 ### **Quick Demo**
 ```bash
@@ -53,13 +69,15 @@ python quick_orky_demo.py
 
 ## 🧠 **KEY DIFFERENCES**
 
-| Transformer | Processing | Memory | Best For |
-|-------------|------------|--------|----------|
-| **Morky Mamba** | Sequential (one word at a time) | Selective memory | Long sequences, efficiency |
+| Version | Processing | Attention | Best For |
+|---------|------------|-----------|----------|
+| **Transfo'ma' v1.2** | Parallel (all words at once) | Standard attention | Learning transformer basics |
+| **Transfo'ma' v1.3** | Parallel (all words at once) | Causal masked attention | Proper training, generation |
 
 ## 🎓 **LEARNING PATH**
 
-1. **Start with Morky Mamba** - Learn sequential processing and selective memory
+1. **Start with Transfo'ma' v1.2** - Learn transformer architecture and attention mechanisms
+2. **Advance to Transfo'ma' v1.3** - Learn causal masking and autoregressive generation
 
 ## 🧹 **CLEANUP NOTES**
 
@@ -70,11 +88,11 @@ python quick_orky_demo.py
 
 ## WAAAGH! (That means "Let's do this with CLEAN ORGANIZATION!" in Ork)
 
-DIS IS DA ULTIMATE CLEAN COLLECTION OF ORKY TRANSFORMERS!
-FROM BASIC ORKS TO MORKY MAMBA, WE GOT EVERYTHING ORGANIZED!
+DIS IS DA ULTIMATE CLEAN COLLECTION OF ORKY TRANSFO'MA'!
+FROM BASIC ORKS TO ADVANCED TRANSFO'MA', WE GOT EVERYTHING ORGANIZED!
 
-DA MORKY MAMBA IS DA PINNACLE OF ORK SEQUENTIAL PROCESSIN'!
-IT'S LIKE HAVIN' A REALLY SMART ORK WHO CAN REMEMBER DA IMPORTANT STUFF
-AND FORGET DA BORING STUFF, ALL WHILE PROCESSIN' THINGS ONE BY ONE!
+DA TRANSFO'MA' IS DA PINNACLE OF ORK PARALLEL PROCESSIN'!
+IT'S LIKE HAVIN' A WHOLE MOB OF ORKS ALL WORKIN' TOGETHER
+TO UNDERSTAND WORDS AND PREDICT WHAT COMES NEXT!
 
 🚀💪🧠
