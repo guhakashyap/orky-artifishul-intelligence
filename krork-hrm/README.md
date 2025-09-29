@@ -278,4 +278,25 @@ That's real kunnin'. That's the Krork way. Now you've seen 'em all. You're ready
 
 ---
 
+### **📚 Learning Resources**
+
+- **HRM Paper:** "Hierarchical Reasoning Model: Brain-Inspired Processing for Complex Tasks" (Research Paper)
+- **Hierarchical Processing:** Understanding how to build multi-level reasoning systems
+- **Strategic Planning:** How high-level modules coordinate with low-level execution
+- **Minimal Data Learning:** How hierarchical systems can learn with less training data
+
+### **🏆 Acknowledgments**
+
+Special thanks to:
+- **Da Orkz** for providing da inspiration and hierarchical thinking
+- **Da Humiez** for inventin' all dis fancy reasoning math
+- **Da Mekboyz** for buildin' all da hierarchical gubbinz
+- **Da Warbosses** for leadin' da WAAAGH!
+
+---
+
+**WAAAGH!** (That means "Let's build some amazing Krork-HRMs!" in Ork)
+
+*Dis module is part of da Orky Artifishul Intelligence project - makin' complex AI concepts accessible through Ork humor and analogies!*
+
 *Built with 💚 by da Ork AI Collective* 🧠⚡

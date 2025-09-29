@@ -268,4 +268,25 @@ That's the secret! The MoE-Waaagh! is like having a hundred Nobs in your brain, 
 
 ---
 
+### **📚 Learning Resources**
+
+- **MoE Paper:** "Switch Transformer: Scaling to Trillion Parameter Models" (Fedus et al., 2021)
+- **Mixture of Experts:** Understanding how to build specialized neural networks
+- **Sparse Activation:** Learning to activate only relevant experts
+- **Routing Mechanisms:** How to assign tasks to the right specialists
+
+### **🏆 Acknowledgments**
+
+Special thanks to:
+- **Da Orkz** for providing da inspiration and clan coordination
+- **Da Humiez** for inventin' all dis fancy expert math
+- **Da Mekboyz** for buildin' all da specialized gubbinz
+- **Da Warbosses** for leadin' da WAAAGH!
+
+---
+
+**WAAAGH!** (That means "Let's build some amazing MoEs!" in Ork)
+
+*Dis module is part of da Orky Artifishul Intelligence project - makin' complex AI concepts accessible through Ork humor and analogies!*
+
 *Built with 💚 by da Ork AI Collective* 🐍⚡

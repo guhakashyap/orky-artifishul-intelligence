@@ -430,4 +430,18 @@ Whether you're an Ork Mekboy learnin' about advanced AI or a human researcher ex
 - **Sparse Attention**: "Longformer: The Long-Document Transformer"
 - **Hybrid Architectures**: "Hydra Attention: Efficient Attention with Many Heads"
 
+### **🏆 Acknowledgments**
+
+Special thanks to:
+- **Da Orkz** for providing da inspiration and multi-head coordination
+- **Da Humiez** for inventin' all dis fancy hybrid math
+- **Da Mekboyz** for buildin' all da specialized gubbinz
+- **Da Warbosses** for leadin' da WAAAGH!
+
+---
+
+**WAAAGH!** (That means "Let's build some amazing Hydras!" in Ork)
+
+*Dis module is part of da Orky Artifishul Intelligence project - makin' complex AI concepts accessible through Ork humor and analogies!*
+
 *Remember: Dis is educational code for learnin' purposes. For production use, you'd want more optimizations and proper training procedures!*

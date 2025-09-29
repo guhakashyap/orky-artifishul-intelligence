@@ -348,4 +348,25 @@ So, da Hyena-Hierarchy is like a proper command structure. **The Boyz find the d
 
 **WAAAGH!** Da Hyena is ready to conquer any sequence processing task! Whether you're processin' massive documents, generatin' endless stories, or analyzin' huge datasets - da Hyena's global convolutions and hierarchical processing will get da job done faster and better dan ever before!
 
+### **📚 Learning Resources**
+
+- **Hyena Paper:** "Hyena Hierarchy: Towards Larger Convolutional Language Models" (Poli et al., 2023)
+- **Global Convolutions:** Understanding long-range dependencies without attention
+- **Hierarchical Processing:** How to process information at multiple scales
+- **Linear Complexity:** Why convolutions can be more efficient than attention
+
+### **🏆 Acknowledgments**
+
+Special thanks to:
+- **Da Orkz** for providing da inspiration and WAAAGH energy
+- **Da Humiez** for inventin' all dis fancy convolution math
+- **Da Mekboyz** for buildin' all da hierarchical gubbinz
+- **Da Warbosses** for leadin' da WAAAGH!
+
+---
+
+**WAAAGH!** (That means "Let's build some amazing Hyenas!" in Ork)
+
+*Dis module is part of da Orky Artifishul Intelligence project - makin' complex AI concepts accessible through Ork humor and analogies!*
+
 *Built with 💚 by da Ork AI Collective* 🐍⚡

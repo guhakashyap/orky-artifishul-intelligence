@@ -152,4 +152,25 @@ DIS IS DA ULTIMATE ORK WAR MACHINE WIF TITAN POWER!
 IT'S LIKE HAVIN' A WHOLE MOB OF ORKS WIF PERFECT MEMORY
 WHO GET MORE EXCITED AND REMEMBER BETTER WHEN SURPRISED!
 
+### **📚 Learning Resources**
+
+- **Titans Paper:** "Titans: Advanced Memory Mechanisms for Large Language Models" (Research Paper)
+- **Memory Systems:** Understanding how to build persistent memory in neural networks
+- **Surprise Detection:** Learning to identify and remember unexpected events
+- **Dynamic Learning:** How models can learn during inference
+
+### **🏆 Acknowledgments**
+
+Special thanks to:
+- **Da Orkz** for providing da inspiration and collective memory
+- **Da Humiez** for inventin' all dis fancy memory math
+- **Da Mekboyz** for buildin' all da titan gubbinz
+- **Da Warbosses** for leadin' da WAAAGH!
+
+---
+
+**WAAAGH!** (That means "Let's build some amazing Titans!" in Ork)
+
+*Dis module is part of da Orky Artifishul Intelligence project - makin' complex AI concepts accessible through Ork humor and analogies!*
+
 🚀💪🧠

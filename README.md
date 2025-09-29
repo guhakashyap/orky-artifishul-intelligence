@@ -36,6 +36,8 @@ The project currently includes:
 
 * **Krork-HRM (krork-hrm/):** A from-scratch implementation of the Hierarchical Reasoning Model (HRM) architecture, featuring brain-inspired hierarchical processing with high-level Warboss planning and low-level Boyz execution. The Krork-HRM is like the ancient Krork intelligence from before the fall - super-intelligent, hierarchical, and capable of complex reasoning with minimal training data!
 
+* **RNN Waaagh (rnn/):** A from-scratch implementation of Recurrent Neural Networks with RNN, LSTM, and GRU variants, featuring sequential memory processing and bidirectional attention. The RNN Waaagh is like having Ork boyz who remember things in order and pass information down the line - each boy remembers what happened before and combines it with new information!
+
 ### **Key Differences: Orky vs Humie Comparison Table**
 
 | **Orky Name** | **Architecture** | **Orky Description** | **Humie Description** | **Best For** | **Complexity** |
@@ -47,6 +49,7 @@ The project currently includes:
 | **🟡 Hyena Hierarchy** | Hyena Convolutional | Like da WAAAGH energy field connectin' all Orks instantly across da battlefield! No attention matrices needed! | Global convolutions for efficient long-range dependencies. Linear complexity with global awareness. | Massive documents, long conversations, global dependencies | O(n) - Linear |
 | **🟠 MoE Waaagh** | Mixture of Experts | Like havin' different Ork clans specializin' in different jobs! Smart Warboss assigns tasks to da right clans! | Mixture of Experts with specialized networks and learned routing. Sparse activation for efficiency. | Complex tasks needing specialized expertise, scalable processing | O(n) - Linear |
 | **🧠 Krork-HRM** | Hierarchical Reasoning Model | Like da ancient Krork intelligence from before da fall! Warboss plans strategy, Boyz handle tactics! | Hierarchical Reasoning Model with brain-inspired processing. High-level planning + low-level execution. | Complex reasoning, minimal data, fast inference | O(n) - Linear |
+| **🧠⚡ RNN Waaagh** | Recurrent Neural Network | Like havin' Ork boyz who remember things in order and pass information down da line! Each boy remembers what happened before! | Sequential processing with hidden state memory. Processes sequences one step at a time with memory. | Sequential data, time series, text generation | O(n) - Linear |
 
 ### **🎯 Quick Architecture Guide:**
 
@@ -57,6 +60,7 @@ The project currently includes:
 **🟡 For Global Dependencies:** Hyena Hierarchy (linear complexity, global awareness)
 **🟠 For Specialized Tasks:** MoE Waaagh (expert networks, sparse activation)
 **🧠 For Complex Reasoning:** Krork-HRM (hierarchical processing, minimal data)
+**🧠⚡ For Sequential Data:** RNN Waaagh (memory processing, time series)
 
 ### **Quick Start**
 
@@ -90,6 +94,10 @@ python moe_demo.py
 # For da Krork-HRM
 cd krork-hrm
 python krork_demo.py
+
+# For da RNN Waaagh
+cd rnn
+python rnn_quick_demo.py
 ```
 
 All implementations include detailed demonstrations that show how da Orks process information and make predictions!

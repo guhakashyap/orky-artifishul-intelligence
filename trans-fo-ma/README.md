@@ -177,6 +177,27 @@ DIS IS DA ULTIMATE CLEAN COLLECTION OF ORKY TRANSFO'MA'!
 FROM BASIC ORKS TO ADVANCED TRANSFO'MA', WE GOT EVERYTHING ORGANIZED!
 
 DA TRANSFO'MA' IS DA PINNACLE OF ORK PARALLEL PROCESSIN'!
+
+### **📚 Learning Resources**
+
+- **Original Transformer Paper:** "Attention is All You Need" (Vaswani et al., 2017)
+- **Multi-Head Attention:** Understanding how multiple attention heads work together
+- **Positional Encoding:** How transformers understand word order
+- **Self-Attention:** The core mechanism that makes transformers powerful
+
+### **🏆 Acknowledgments**
+
+Special thanks to:
+- **Da Orkz** for providing da inspiration and battle cries
+- **Da Humiez** for inventin' all dis fancy attention math
+- **Da Mekboyz** for buildin' all da attention gubbinz
+- **Da Warbosses** for leadin' da WAAAGH!
+
+---
+
+**WAAAGH!** (That means "Let's build some amazing Transformers!" in Ork)
+
+*Dis module is part of da Orky Artifishul Intelligence project - makin' complex AI concepts accessible through Ork humor and analogies!*
 IT'S LIKE HAVIN' A WHOLE MOB OF ORKS ALL WORKIN' TOGETHER
 TO UNDERSTAND WORDS AND PREDICT WHAT COMES NEXT!
 

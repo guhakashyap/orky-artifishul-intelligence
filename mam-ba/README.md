@@ -168,4 +168,25 @@ DIS IS DA MORKY MAMBA - DA ORKY WAY OF DOIN' SEQUENTIAL PROCESSIN'!
 IT'S LIKE HAVIN' A REALLY SMART ORK WHO CAN REMEMBER DA IMPORTANT STUFF
 AND FORGET DA BORING STUFF, ALL WHILE PROCESSIN' THINGS ONE BY ONE!
 
+### **📚 Learning Resources**
+
+- **Mamba Paper:** "Mamba: Linear-Time Sequence Modeling with Selective State Spaces" (Gu & Dao, 2023)
+- **State Space Models:** Understanding selective memory mechanisms
+- **Selective Attention:** How to remember important information and forget unimportant details
+- **Sequential Processing:** Why one-by-one processing can be more efficient
+
+### **🏆 Acknowledgments**
+
+Special thanks to:
+- **Da Orkz** for providing da inspiration and selective memory
+- **Da Humiez** for inventin' all dis fancy state space math
+- **Da Mekboyz** for buildin' all da selective gubbinz
+- **Da Warbosses** for leadin' da WAAAGH!
+
+---
+
+**WAAAGH!** (That means "Let's build some amazing Mambas!" in Ork)
+
+*Dis module is part of da Orky Artifishul Intelligence project - makin' complex AI concepts accessible through Ork humor and analogies!*
+
 🧠⚡🎯
