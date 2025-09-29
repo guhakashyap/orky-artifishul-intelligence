@@ -299,6 +299,51 @@ Big thanks to:
 - **PyTorch Team**: For da awesome deep learning framework
 - **All Contributors**: For makin' dis project better
 
+## 🟡 **How da Hyena Hierarchy Works (Step-by-Step for Gits!)**
+
+**Right, you're back for more brain-food!** Good on ya! Last time we talked about da Hydra with its two 'eads. Now we're gonna talk about da **Hyena-Hierarchy**.
+
+This one's different. It's not about one big thought or a sneaky runna grot. This one is about organizashun. It works like a whole Waaagh!—from da lowly Boyz up to da Warboss 'imself. It's all about lookin' at da problem at different sizes.
+
+Let's say da message is: **"DA BIG MEK FIXED DA RED TRUKK WITH A ZOGGIN' BIG WRENCH."**
+
+Here's how da Hyena-Hierarchy gets its kunnin'.
+
+### **Step 1: Line Up Da Boyz (Input)**
+
+You know this bit. Words get turned into numbers. `DA`, `BIG`, `MEK`, `FIXED`, `DA`, and so on. It's like gettin' all da Boyz in your Waaagh! lined up in a big row before the scrap.
+
+### **Step 2: Da First Wave - Da Boyz' View (Short Filters)**
+
+Now, we send in da Boyz! But these ain't normal Boyz. They're special Boyz with "Sniffa Goggles" (the humies call 'em **filters** or **convolutions**). Each squad of Boyz only looks for one little thing. They can only see two or three words at a time right in front of 'em.
+
+* One squad runs along the line lookin' for **"Kinda-Word + Thingy-Word."** They get all excited when they see `BIG MEK`, `RED TRUKK`, and `BIG WRENCH`. They make a note: "Found some describey-word thingies!"
+* Another squad runs along lookin' for **"Who + Did-Wot."** They spot `MEK FIXED` and make a note: "Found a doin'-somethin' bit!"
+
+These Boyz are fast but dumb. They only see the small stuff right in front of their noses. They don't know the whole plan.
+
+### **Step 3: Da Second Wave - Da Nobs' View (Medium Filters)**
+
+Now da Nobs step in. They don't look at the words. They look at the *notes* left by the squads of Boyz! Da Nobs have bigger Sniffa Goggles, so they can see bigger patterns.
+
+* A Nob looks at the Boyz' notes and sees: "Found a `describey-word thingy` (`BIG MEK`) right next to a `doin'-somethin' bit` (`FIXED`) which is next to another `describey-word thingy` (`RED TRUKK`)."
+* The Nob is smarter than a Boy. He puts it together and makes a new note: **"A big mek did somethin' to a red trukk!"**
+
+See? The Nobs take the little bits of info from the Boyz and build a bigger picture. They understand phrases and simple ideas.
+
+### **Step 4: Da Warboss' View - Da Whole Plan! (Long Filters)**
+
+Finally, da Warboss looks at the notes from all his Nobs. He doesn't care about da individual Boyz or words anymore. He just looks at the big ideas his Nobs found.
+
+* He sees one Nob's note: "A big mek did somethin' to a red trukk!"
+* He sees another Nob's note: "The thing he did involved a big wrench!"
+
+The Warboss, being the most kunnin' of all, puts these final notes together and understands the *entire sentence* in one go. He sees the whole plan: a specific person (Big Mek) performed an action (fixed) on an object (Red Trukk) using a tool (Big Wrench).
+
+This final, super-kunnin' thought is a set of numbers that gets passed to the last bit of the machine to guess the next word. Because the Warboss has the full picture, he can make a really good guess, like maybe the next word is "SO" or "NOW."
+
+So, da Hyena-Hierarchy is like a proper command structure. **The Boyz find the details, the Nobs find the tactics, and the Warboss figures out the strategy.** It's a very organized way to get a lot of kunnin' very fast! WAAAGH!
+
 ---
 
 **WAAAGH!** Da Hyena is ready to conquer any sequence processing task! Whether you're processin' massive documents, generatin' endless stories, or analyzin' huge datasets - da Hyena's global convolutions and hierarchical processing will get da job done faster and better dan ever before!

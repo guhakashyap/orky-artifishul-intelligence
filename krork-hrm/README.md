@@ -219,6 +219,57 @@ model = create_orky_krork_hrm(
 - Efficient learning with minimal data
 - Fast reasoning through smart architecture
 
+## 🧠 **How da Krork-HRM Works (Step-by-Step for Gits!)**
+
+**OI! Look at you!** "Gettin' smart," is it? You're startin' to sound less like a Git and more like a proper Brainboy! Good! Dat means yer ready for da final lesson. Yer ready for da biggest, most kunnin' of 'em all... da **Krork-HRM!**
+
+The Krork, see, were da Orks from long ago. They weren't just brutal—they were brilliant. They didn't just fight; they made *plans*. And that's what this machine does. It doesn't just read words; it tries to understand the whole scrap, like a Warboss with a big battle map.
+
+Let's say da report from da front is: **"NOB GITSPLITTA KRUMPED DA GROT 'CUZ DA GROT DROPPED 'IS FAVORITE SHOOTA."**
+
+A normal finkin' machine understands the words. The Krork-HRM understands the *story*.
+
+### **Step 1: A Scout Reports In (Input)**
+
+Same as always. Da sentence gets turned into numbers. This is like a scout Grot runnin' up to the command tent, out of breath and yellin' what he saw.
+
+### **Step 2: Da Nob Listens to da Yellin' (Text Understanding)**
+
+First, the message goes to a normal part of the machine, like a Transfo'ma' 'ead. This is like the Nob on duty. He listens to the Grot's report and gets the basic idea. He understands the words and who did what. He knows "Gitsplitta" did some "krumpin'" on a "grot" with a "shoota" involved somehow. It's a good summary, but it's just the surface.
+
+### **Step 3: Da Warboss Draws da Battle Map (The Reasoning Bit)**
+
+This is the special Krork part. The Nob's summary goes up to the Warboss. The Warboss don't just listen. He gets out his big map and his little models and he builds a picture of what *really* happened. This ain't a word-map, it's an idea-map.
+
+1.  **He puts down the pieces:**
+    * A big piece for `NOB GITSPLITTA`.
+    * A small piece for `DA GROT`.
+    * A shiny piece for `FAVORITE SHOOTA`.
+
+2.  **He shows what happened (The Actions):**
+    * He draws a big, red arrow from `(GITSPLITTA)` to `(DA GROT)` and labels it **KRUMPED**.
+    * He draws another arrow from `(DA GROT)` to `(FAVORITE SHOOTA)` and labels it **DROPPED**.
+
+3.  **NOW, DA KUNNIN' PART! He finds the "Why" (The Relationship):**
+    * He looks at the word **"'CUZ"**. That's a reason-word!
+    * He draws a big, glowing line connecting the **DROPPED** action to the **KRUMPED** action. This line means: "THIS happened *BECAUSE* OF THAT."
+
+The Warboss now has a perfect picture in his head. Not just a string of words, but a map of who did what to whom, and *why*. He understands the situation.
+
+### **Step 4: Uzin' da Map to Lead da WAAAGH! (Output)**
+
+Now, when you ask the Krork-HRM a question, it doesn't just guess from the words. It looks at its shiny new battle map.
+
+* If you ask: **"Wot did Gitsplitta do?"**
+    It looks at the map, sees the `(GITSPLITTA)` piece, and follows the **KRUMPED** arrow to the `(DA GROT)` piece. It answers: "He krumped da grot."
+
+* But here's the smart bit. If you ask: **"Why did da grot get krumped?"**
+    A lesser machine might get confused. But the Krork-HRM looks at the **KRUMPED** action on its map, sees the glowing **"BECAUSE"** line, and follows it back to the **DROPPED** action. It answers: **"'Cuz he dropped da Nob's favorite shoota!"**
+
+See? You're smart enough to get it now! Da other models are Boyz who can follow orders. Da Krork-HRM is a Warboss who can write the whole battle plan 'cuz he understands *why* the fighting is happening. It builds a map of ideas, not just words.
+
+That's real kunnin'. That's the Krork way. Now you've seen 'em all. You're ready for your own WAAAGH!, ya smart git! Go on, get to it!
+
 ## 🎉 **CONCLUSION**
 
 **WAAAGH!** Da Krork-HRM architecture shows how hierarchical reasoning can solve complex problems with minimal training data! Da Warboss handles strategic plannin' while da boyz handle tactical execution, makin' da whole system incredibly efficient!

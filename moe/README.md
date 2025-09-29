@@ -203,6 +203,63 @@ model = create_orky_moe_model(
 - Scaling efficiency
 - Task specialization patterns
 
+## 🟠 **How da MoE Waaagh Works (Step-by-Step for Gits!)**
+
+**OI, LISTEN UP!** You're gettin' real deep into da kunnin' of these finkin' machines! Now we get to one of da sneakiest, Orkiest ideas of 'em all: da **MoE-Waaagh!**
+
+What's "MoE"? It stands for **"Mix-chur of Eksperts."**
+
+Think of it like this. Instead of one massive Warboss who has to know everythin' about everythin'—which is impossible, even for an Ork!—you have a big war council. In this council, you have a bunch of different Specialist Nobs. Each Nob is a genius at *one thing*.
+
+### **The Specialist Nobs (Da Eksperts):**
+
+Imagine a big room with a bunch of Nobs sittin' around a table, mostly sleepin' or pickin' their teef.
+
+* **Nob Gitsplitta:** He's the **Shootin' Ekspert**. He knows everythin' about dakka, shootas, blastas, and how to make things go 'BOOM'.
+* **Nob Facekrumpa:** He's the **Choppin' Ekspert**. All he thinks about is axes, chainswords, and the best way to krump a git up close.
+* **Nob Mek-head:** He's the **Buildin' Ekspert**. He knows about truks, stompas, fixin' stuff, and makin' new killy-kans.
+* **Nob Gobsmasha:** He's the **Planin' Ekspert**. He's good with big words like "Waaagh!", "taktiks", and "get 'em!"
+
+There are lots more of these Nobs, each one an ekspert in his own little thing.
+
+Now, here's how the machine works, step-by-step.
+
+### **Step 1: A Grot Runs In Yellin' (Input)**
+
+A problem comes in. Just like before, it's a word or a sentence turned into numbers. Let's say the input is the word **"DAKKA"**. This is like a Grot runnin' into the war council with a message.
+
+### **Step 2: Da Big Mek Points His Klaw (The Router)**
+
+The message doesn't go to all the Nobs at once. That would be chaos! Instead, it goes to one special git standin' in the middle of the room: the **Gatekeepa Nob**, or the **Router**.
+
+This Gatekeepa's only job is to look at the message and decide which Specialist Nob is the right one for the job. He doesn't solve the problem, he just *routes* it.
+
+* The Gatekeepa sees the numbers for **"DAKKA."**
+* He sniffs the air and thinks, "Dat smells like shootin'!"
+* He turns and points his Power Klaw right at a dozin' Nob Gitsplitta and yells, **"OI! GITSPLITTA! WAKE UP! DIS ONE'S FOR YOU!"**
+
+All the other Nobs—Facekrumpa, Mek-head, Gobsmasha—keep snoozin'. They ain't needed.
+
+### **Step 3: Da Ekspert Does Da Finkin' (The Expert Layer)**
+
+The problem—the numbers for "DAKKA"—is sent *only* to Nob Gitsplitta's little corner of the machine.
+
+Since Gitsplitta is a specialist, his brain is smaller and faster than one giant brain that knows everything. He thinks real hard about "DAKKA" and comes up with a proppa Orky response (a new set of numbers).
+
+### **Step 4: Yellin' Out Da Answer (Output)**
+
+Nob Gitsplitta yells out his answer. This answer is then sent to the final part of the machine to be turned back into a word. Because the Shootin' Ekspert handled it, the next word is probably gonna be "MORE" or "DAKKA" again!
+
+**What if the word is tricky?** Like the word **"STOMPA"?**
+
+The Gatekeepa might get confused. "Is a Stompa about buildin' or is it about krumpin'?" In that case, he might wake up *two* Nobs!
+
+He'll point at **Nob Mek-head** (the Buildin' Ekspert) and **Nob Facekrumpa** (the Choppin' Ekspert) and yell, **"BOTH OF YA! GIVE ME YER FOUGHTS!"**
+
+The machine then takes the answer from both Nobs and cleverly mixes 'em together to get the best possible result.
+
+That's the secret! The MoE-Waaagh! is like having a hundred Nobs in your brain, but you only use the one or two you need for each word. This means the machine can have a massive amount of kunnin', but it runs super fast 'cause most of it is sleepin' at any one time! It's brutally efficient!
+
 ## 🎉 **CONCLUSION**
 
 **WAAAGH!** Da MoE architecture shows how specialized Ork clans can work together efficiently! Each expert focuses on their specialty, makin' da whole system more powerful and efficient!

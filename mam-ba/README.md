@@ -103,6 +103,65 @@ python3 morky_mamba1.0.py
 1. **Start with Morky Mamba v1.0** - Learn sequential processing and selective memory
 2. **Advance to Morky Mamba v1.1** - Learn proppa' SSM discretization and integrated gates
 
+## 🔴 **How da Morky Mamba Works (Step-by-Step for Gits!)**
+
+**ALRIGHT, YA GIT, SIT DOWN!** So ya figured out da Transfo'ma', but now ya wanna know about da **Morky Mamba**? Dat's a different kinda beast. It's less like a big stompy Gargant and more like a sneaky, kunnin' Squig that remembers everythin'.
+
+Da Transfo'ma' does a "Big Look-See" at all yer words at once. Da Mamba is faster, it works more like a Grot runnin' a message down a long line of Boyz.
+
+Let's say da order from da Warboss is: **"FIRST WE KRUMP, DEN WE LOOT!"**
+
+Here's how da Morky Mamba figures it out, step-by-step.
+
+### **Step 1: Givin' da Grot da Message (Input)**
+
+Just like before, we gotta turn da words into numbers a machine can understand.
+
+* "FIRST", "WE", "KRUMP", "DEN", "WE", "LOOT" get turned into numbers (tokens).
+* Each number gets a list of stats (embedding) to give it some meanin'.
+
+This is like writin' down the message on a slate and handin' it to a special Runna Grot. This Grot is gonna run past a line of Boyz, and each Boy is one of yer words in order.
+
+### **Step 2: Da Grot's Run (The Selective Scan)**
+
+This is da main bit of da Mamba. The Runna Grot has a tiny brain, so he can only hold one thought at a time. We'll call this thought his **"memory"** (the humies call it a "state"). As he runs past each Ork in the line, his memory gets updated.
+
+#### **The First Boy: "FIRST"**
+
+The Grot runs up to the first Ork, who represents the word **"FIRST"**. This Ork looks at the Grot's empty memory and yells two things at him:
+1.  **"FORGET STUFF!"**: "Yer memory is empty, ya git, so there's nothin' to forget!"
+2.  **"REMEMBER DIS!"**: "The most important thing right now is that this is the *first* part of the plan! Shove that in yer brain!"
+
+The Grot updates his memory. It now just holds the idea of "this is the beginning."
+
+#### **The Second Boy: "WE"**
+
+The Grot runs to the next Ork, representing **"WE"**. This Ork sees the Grot's memory and yells:
+1.  **"FORGET STUFF!"**: "That 'first' bit ain't so important anymore. Keep a little of it, but mostly forget it."
+2.  **"REMEMBER DIS!"**: "The important bit now is 'WE'. This plan is about *us*! Add that to yer memory!"
+
+The Grot's memory now holds a mix of "this is the beginning" and "it's about us."
+
+#### **The Third Boy: "KRUMP"**
+
+Now for the good part. The Grot gets to the **"KRUMP"** Ork. This Ork is very loud.
+1.  **"FORGET STUFF!"**: "Who cares about 'we' or 'first'?! Forget most of that zoggin' stuff!"
+2.  **"REMEMBER DIS!"**: "**KRUMPIN'!** That's the most important bit! Burn it into yer tiny brain! **KRUMP!**"
+
+The Grot's memory is now almost completely full of the glorious idea of "KRUMP". This is the "selective" part of the scan. The model *selects* what to keep and what to forget based on how important the new word is. A word like "KRUMP" is very important, so it overrides a lot of the old memory. A word like "da" is less important, so it wouldn't change the memory much.
+
+This continues all the way down the line for **"DEN"**, **"WE"**, and **"LOOT"**. By the time the Grot reaches the end of the line, his little memory contains the kunnin' of the *whole sentence*, squished down into one smarty-pants thought.
+
+### **Step 3: Wot da Grot Learned (The Output)**
+
+After the Grot has finished his run, we grab him and look at his final memory. This memory is a list of numbers that represents the meaning of "FIRST WE KRUMP, DEN WE LOOT!"
+
+This final list of numbers is then used to guess what comes next, just like in da Transfo'ma'. It goes through a final bit that turns the numbers into a guess for the next word.
+
+So if you just gave it "FIRST WE KRUMP," the Grot's memory would be full of "KRUMPIN'," and it would probably guess the next word is "DA" or "GITZ".
+
+That's da Morky Mamba. It's a fast, sneaky way of readin' a sentence one bit at a time, constantly decidin' wot's important to remember and wot's useless gubbinz to forget. It's proppa kunnin', not just brutal!
+
 ## WAAAGH! (That means "Let's do this with SELECTIVE MEMORY!" in Ork)
 
 DIS IS DA MORKY MAMBA - DA ORKY WAY OF DOIN' SEQUENTIAL PROCESSIN'!
