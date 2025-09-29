@@ -53,14 +53,14 @@ The project currently includes:
 
 ### **🎯 Quick Architecture Guide:**
 
-**🧠⚡ For Sequential Data:** RNN Waaagh (memory processing, time series)
-**🔵 For General Tasks:** Orky Transfo'ma' (parallel processing, attention)
-**🔴 For Long Sequences:** Morky Mamba (selective memory, efficiency)
-**🟢 For Hybrid Tasks:** Hydra Waaagh (best of all worlds)
-**🟡 For Global Dependencies:** Hyena Hierarchy (linear complexity, global awareness)
-**🟠 For Specialized Tasks:** MoE Waaagh (expert networks, sparse activation)
-**🧠 For Complex Reasoning:** Krork-HRM (hierarchical processing, minimal data)
-**🟣 For Memory Tasks:** Gargant Titans (advanced memory, surprise detection)
+* **🧠⚡ For Sequential Data:** RNN Waaagh (memory processing, time series)
+* **🔵 For General Tasks:** Orky Transfo'ma' (parallel processing, attention)
+* **🔴 For Long Sequences:** Morky Mamba (selective memory, efficiency)
+* **🟢 For Hybrid Tasks:** Hydra Waaagh (best of all worlds)
+* **🟡 For Global Dependencies:** Hyena Hierarchy (linear complexity, global awareness)
+* **🟠 For Specialized Tasks:** MoE Waaagh (expert networks, sparse activation)
+* **🧠 For Complex Reasoning:** Krork-HRM (hierarchical processing, minimal data)
+* **🟣 For Memory Tasks:** Gargant Titans (advanced memory, surprise detection)
 
 ### **Quick Start**
 
