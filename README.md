@@ -28,27 +28,35 @@ The project currently includes:
 
 * **Gargant Titans (gargant/):** A from-scratch implementation of the Titans architecture, featuring advanced memory mechanisms and surprise detection. The Gargant is like a massive Ork war machine with collective WAAAGH memory that grows stronger over time, surprise detection that remembers unexpected events, and dynamic memory that learns during battle (test time).
 
-### **Key Differences: Orky Transfo'ma' vs Morky Mamba vs Gargant Titans**
+* **Hydra Waaagh (hydra/):** A from-scratch implementation of the Hydra hybrid architecture, combining State Space Models, multi-head attention, and Mixture of Experts. The Hydra is like having multiple Ork Warbosses all specializing in different things but working together - each head focuses on different aspects (local fights, long-range battles, memory, prediction) while sharing the same WAAAGH energy!
 
-**Orky Transfo'ma':**
-- Like a big mob of Orks all shoutin' at words at da same time
-- All words can "talk" to each other simultaneously (parallel processing)
-- Great for understandin' relationships between words
-- Uses attention mechanisms to focus on important words
+* **Hyena Hierarchy (hyena/):** A from-scratch implementation of the Hyena convolutional sequence model, using global convolutions for efficient long-range dependencies. The Hyena is like the WAAAGH energy field connecting all Orks instantly across the battlefield - processing sequences in linear time with global awareness, perfect for handling massive documents and long conversations!
 
-**Morky Mamba:**
-- Like a really smart Ork who reads words one by one and remembers selectively
-- Processes words sequentially (one at a time)
-- Can selectively remember important stuff and forget boring stuff
-- More efficient for long sequences and has better memory management
+* **MoE Waaagh (moe/):** A from-scratch implementation of the Mixture of Experts architecture, featuring specialized expert networks with learned routing and sparse activation. The MoE is like having different Ork clans specializing in different jobs - each clan is really good at their specialty, and the smart Warboss (router) assigns tasks to the right clans!
 
-**Gargant Titans:**
-- Like a massive Ork war machine with collective WAAAGH memory
-- Features advanced memory mechanisms and surprise detection
-- Collective memory that grows stronger over time
-- Surprise detection that remembers unexpected events
-- Dynamic memory that learns during battle (test time)
-- The ultimate Ork war machine with multiple heads and layers
+* **Krork-HRM (krork-hrm/):** A from-scratch implementation of the Hierarchical Reasoning Model (HRM) architecture, featuring brain-inspired hierarchical processing with high-level Warboss planning and low-level Boyz execution. The Krork-HRM is like the ancient Krork intelligence from before the fall - super-intelligent, hierarchical, and capable of complex reasoning with minimal training data!
+
+### **Key Differences: Orky vs Humie Comparison Table**
+
+| Architecture | **Orky Description** | **Humie Description** | **Best For** | **Complexity** |
+|--------------|---------------------|----------------------|--------------|----------------|
+| **🔵 Orky Transfo'ma'** | Like a big mob of Orks all shoutin' at words at da same time! All words can "talk" to each other simultaneously! | Parallel processing with attention mechanisms. All tokens can attend to each other simultaneously. | Understanding relationships between words, general language tasks | O(n²) - Quadratic |
+| **🔴 Morky Mamba** | Like a really smart Ork who reads words one by one and remembers selectively! Can forget boring stuff! | Sequential processing with selective memory. Processes tokens one at a time with selective state updates. | Long sequences, memory management, efficient processing | O(n) - Linear |
+| **🟣 Gargant Titans** | Like a massive Ork war machine with collective WAAAGH memory! Surprise detection remembers unexpected events! | Advanced memory mechanisms with surprise detection. Collective memory that grows stronger over time. | Complex memory tasks, surprise detection, dynamic learning | O(n) - Linear |
+| **🟢 Hydra Waaagh** | Like multiple Ork Warbosses all specializin' in different fings but workin' together! Each head has a specialty! | Hybrid architecture combining SSMs, multi-head attention, and MoE. Each head specializes in different aspects. | Complex tasks needing multiple capabilities, hybrid processing | O(n) - Linear |
+| **🟡 Hyena Hierarchy** | Like da WAAAGH energy field connectin' all Orks instantly across da battlefield! No attention matrices needed! | Global convolutions for efficient long-range dependencies. Linear complexity with global awareness. | Massive documents, long conversations, global dependencies | O(n) - Linear |
+| **🟠 MoE Waaagh** | Like havin' different Ork clans specializin' in different jobs! Smart Warboss assigns tasks to da right clans! | Mixture of Experts with specialized networks and learned routing. Sparse activation for efficiency. | Complex tasks needing specialized expertise, scalable processing | O(n) - Linear |
+| **🧠 Krork-HRM** | Like da ancient Krork intelligence from before da fall! Warboss plans strategy, Boyz handle tactics! | Hierarchical Reasoning Model with brain-inspired processing. High-level planning + low-level execution. | Complex reasoning, minimal data, fast inference | O(n) - Linear |
+
+### **🎯 Quick Architecture Guide:**
+
+**🔵 For General Tasks:** Orky Transfo'ma' (parallel processing, attention)
+**🔴 For Long Sequences:** Morky Mamba (selective memory, efficiency)
+**🟣 For Memory Tasks:** Gargant Titans (advanced memory, surprise detection)
+**🟢 For Hybrid Tasks:** Hydra Waaagh (best of all worlds)
+**🟡 For Global Dependencies:** Hyena Hierarchy (linear complexity, global awareness)
+**🟠 For Specialized Tasks:** MoE Waaagh (expert networks, sparse activation)
+**🧠 For Complex Reasoning:** Krork-HRM (hierarchical processing, minimal data)
 
 ### **Quick Start**
 
@@ -66,6 +74,22 @@ python mam-ba1.0.py
 # For da Gargant Titans
 cd gargant
 python gargant_titans.py
+
+# For da Hydra Waaagh
+cd hydra
+python hydra_waaagh.py
+
+# For da Hyena Hierarchy
+cd hyena
+python hyena_demo.py
+
+# For da MoE Waaagh
+cd moe
+python moe_demo.py
+
+# For da Krork-HRM
+cd krork-hrm
+python krork_demo.py
 ```
 
 All implementations include detailed demonstrations that show how da Orks process information and make predictions!
