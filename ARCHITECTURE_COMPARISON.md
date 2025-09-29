@@ -1,6 +1,6 @@
 # 🏗️ ORKY ARTIFISHUL INTELLIGENCE - ARCHITECTURE COMPARISON! 🐍⚡
 
-**WAAAGH!** Dis is da complete guide to all da different Ork war machines and how dey compare to da fancy humie architectures! From basic Ork mobs to advanced WAAAGH machines, we got everyfin' covered!
+**WAAAGH!** Dis is da complete guide to all da different Ork war machines and how dey compare to da fancy humie arky-tek-churs! From basic Ork mobs to advanced WAAAGH machines, we got everyfin' covered!
 
 ## 📊 **PART A: REAL-WORLD ARCHITECTURE COMPARISON**
 
@@ -44,7 +44,7 @@
 
 ## 🐍 **PART B: ORKY ARCHITECTURE TYPES**
 
-*Our educational implementations covering the full spectrum of modern AI architectures*
+*Our educational implementations covering the full spectrum of modern AI arky-tek-churs*
 
 ### **🔵 TRANSFORMER ARCHITECTURE**
 
@@ -183,7 +183,7 @@
 - Run: `python hyena_demo.py`
 
 **Level 4: Hydra (hydra/)**
-- Learn: Hybrid architectures, MoE, sparse attention
+- Learn: Hybrid arky-tek-churs, MoE, sparse attention
 - Run: `python hydra_demo.py`
 
 **Level 5: Titans (gargant/)**
@@ -217,7 +217,7 @@
 
 ## 🏆 **CONCLUSION**
 
-**WAAAGH!** We've covered da complete spectrum of modern AI architectures! From basic Ork mobs (Transformers) to advanced WAAAGH machines (Titans), each has its place in da great Ork arsenal!
+**WAAAGH!** We've covered da complete spectrum of modern AI arky-tek-churs! From basic Ork mobs (Transformers) to advanced WAAAGH machines (Titans), each has its place in da great Ork arsenal!
 
 **For da Boyz:** Each architecture is like a different type of Ork war machine - choose da right one for da job!
 
